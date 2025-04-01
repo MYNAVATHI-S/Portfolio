@@ -3,146 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skills</title>
-        <link rel="stylesheet" href="./assets/css/skills.css">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-   
+    <title>My Skills</title>
 
+    <!-- External CSS for Boxicons and Bootstrap Icons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://kit.fontawesome.com/0ac83e1618.js" crossorigin="anonymous" defer></script>
+
+    <style>
+        /* Resetting margin, padding, and box-sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: #1f242d; /* Dark background */
+            color: #fff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .btn{
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #1f242d;
+    border-radius: 4rem;
+    font-size: 1.2rem;
+    color: white;
+    border: 2px solid #0ef;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.btn:hover{
+    transform: scale3d(1.03);
+    background-color: #0ef;
+    color:black;
+    box-shadow: 0 0 20px #0ef;
+}
+        /* Skills Section */
+        .skills-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: rgba(32, 36, 45, 0.9); /* Semi-transparent background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h3 {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        /* Skills Categories */
+        .skills-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            justify-content: center;
+        }
+
+        .skill-category {
+            background-color: #323946;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 750px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        /* Hover animation */
+        .skill-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+        }
+
+        .skill-category h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .skill-bar {
+            background-color: #2b333e;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-bar h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .skill-bar i {
+            font-size: 2rem;
+            color: #0ef;
+            transition: transform 0.3s ease;
+        }
+
+        /* Adding animation effect on icon hover */
+        .skill-bar i:hover {
+            transform: scale(1.2);
+        }
+
+        /* Add glow effect on button hover */
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+    </style>
 
 </head>
 <body>
-    <br><br> <a href="index.html" class="btn">Home</a>
-   <header>
+
+    <!-- Back to Home Button -->
+    <a href="index.html" class="btn">Home</a>
+   
+    <!-- Skills Section -->
     <section id="skills" class="skills-section">
         <div class="section-header">
-            <h3 >My Skills</h3>
+            <h3>My Skills</h3>
         </div>
-        <br> <br>
+        
+        <!-- Frontend Skills (HTML, CSS, JS) -->
         <div class="skills-categories">
-            <!-- Database -->
+            <div class="skill-category" data-category="frontend">
+                <div class="category-header">
+                    <h3>Frontend Development</h3>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-bar">
+                        <h2>HTML</h2>
+                        <i class="fa-brands fa-html5 fa-2xl"></i>
+                    </div>
+                    <div class="skill-bar">
+                        <h2>CSS</h2>
+                        <i class="fa-brands fa-css3-alt fa-2xl"></i>
+                    </div>
+                    <div class="skill-bar">
+                        <h2>JavaScript</h2>
+                        <i class="fa-brands fa-js fa-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <!-- Database Skills (SQL, MySQL) -->
+        <div class="skills-categories">
             <div class="skill-category" data-category="database">
                 <div class="category-header">
-                
-                    <h3 >Database</h3>
-                </div>   
-
-
-                <div class="skills-grid">
-                   <div class="skill-bar">
-                        
-                <h2>SQL</h2> 
-                <br><br>
-                <i class="fa-solid fa-database fa-2xl"></i>
-                       
-                    </div>
-                    <br><br>
-                    <div class="skill-bar">                        
-                            <h2>Excel</h2> <br>
-                            <i class="bi bi-file-excel fa-2xl"></i>    
-                    </div><br><br>
-                    <div class="skills-grid">
-                        <br>   <div class="skill-bar">
-                            
-                    <h2>Word</h2> 
-                    <br>
-                    <i class="bi bi-file-earmark-word fa-2xl"></i>
-                           
-                        </div>
-                
-            </div>
-                   
-      </section>     
-
-    <header>
-        <section id="skills" class="skills-section">
-        
-            <div class="skills-categories">
-                <!-- Database -->
-                <div class="skill-category" data-category="database">
-                    <br><br> <div class="category-header">
-                    
-                        <h3 >Development</h3>
-                    </div>   
-    
-    
-                    <div class="skills-grid">
-                       <div class="skill-bar">
-                            
-                    <h2>C#</h2> 
-                    <br><br>
-                    <i class="fa-solid fa-c fa-2xl"></i>
-                           
-                        </div>
-                        <br><br>
-                        <div class="skill-bar">                        
-                                <h2>PHP</h2> <br>
-                                <i class="fa-brands fa-php fa-2xl"></i>
-                        </div><br><br>
-                        <div class="skills-grid">
-                            <br>   <div class="skill-bar">
-                                
-                        <h2>C++</h2> 
-                        <br>
-                      
-                               
-                            </div>
-                    
+                    <h3>Database</h3>
                 </div>
-
-
-
-
-   
-          
-
-   </header> 
-  
-   <header>
-    <section id="skills" class="skills-section">
-    
-        <div class="skills-categories">
-            <!-- Database -->
-            <div class="skill-category" data-category="database">
-                <br><br> <div class="category-header">
-                
-                    <h3 >Soft Skills</h3>
-                </div>   
-
-
                 <div class="skills-grid">
-                   <div class="skill-bar">
-                        
-                <h2>- Time management </h2> 
-                <br><br>
-                
-                       
+                    <div class="skill-bar">
+                        <h2>SQL</h2>
+                        <i class="fa-solid fa-database fa-2xl"></i>
                     </div>
-                    <br><br>
-                    <div class="skill-bar">                        
-                            <h2>- Leadership </h2> <br>
-                           
-                    </div><br><br>
                     <div class="skills-grid">
-                        <br>   <div class="skill-bar">
-                            
-                    <h2>- Adaptability </h2> 
-                    <br>
-                    <div class="skills-grid">
-                        <br>  <br>   <div class="skill-bar">
-                            
-                    <h2>- Hard work</h2> 
-                    <br>
-                           
+                        <div class="skill-bar">
+                            <h2>PHP</h2>
+                            <i class="fa-brands fa-php fa-2xl"></i>
                         </div>
-                
+                    <div class="skill-bar">
+                        <h2>MySQL</h2>
+                        <i class="fa-solid fa-database fa-2xl"></i>
+                    </div>
+                </div>
             </div>
+        </div>
+<br><br>
+        <!-- IoT Skills (Blynk, Arduino IDE) -->
+        <div class="skills-categories">
+            <div class="skill-category" data-category="iot">
+                <div class="category-header">
+                    <h3>IoT Development</h3>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-bar">
+                        <h2>Blynk</h2>
+                        <i class="bi bi-phone fa-2xl"></i>
+                    </div>
+                    <div class="skill-bar">
+                        <h2>Arduino IDE</h2>
+                        <i class="fa-brands fa-arduino fa-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</section>
- 
+        <div class="skills-categories">
+            <!-- Development Skills -->
+            <div class="skill-category" data-category="development">
+                <div class="category-header">
+                    <h3>Development</h3>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-bar">
+                        <h2>LT Spice</h2>
+                    </div>
 
-</header>   
-   
+
+                </div>
+                <div class="skill-bar">
+                    <h2>Fusion 360</h2>
+                    <i class="fa-solid fa-cogs fa-2xl"></i> <!-- Gear icon for Fusion 360 -->
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="skills-categories">
+            <!-- Soft Skills -->
+            <div class="skill-category" data-category="soft-skills">
+                <div class="category-header">
+                    <h3>Soft Skills</h3>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-bar">
+                        <h2>Time Management</h2>
+                        <i class="fa-solid fa-clock fa-2xl"></i> <!-- Clock icon -->
+                    </div>
+
+                    <div class="skill-bar">
+                        <h2>Adaptability</h2>
+                        <i class="fa-solid fa-random fa-2xl"></i> <!-- Random (Adaptability) icon -->
+                    </div>
+
+                    <div class="skill-bar">
+                        <h2>Leadership</h2>
+                        <i class="fa-solid fa-users fa-2xl"></i> <!-- Users (Leadership) icon -->
+                    </div>
+
+                    <div class="skill-bar">
+                        <h2>Hard Work</h2>
+                        <i class="fa-solid fa-briefcase fa-2xl"></i> <!-- Briefcase (Hard Work) icon -->
+                    </div>
+
+                    <div class="skill-bar">
+                        <h2>Communication</h2>
+                        <i class="fa-solid fa-comments fa-2xl"></i> <!-- Comments (Communication) icon -->
+                    </div>
+
+                    <div class="skill-bar">
+                        <h2>Teamwork</h2>
+                        <i class="fa-solid fa-users-cog fa-2xl"></i> <!-- Users Cog (Teamwork) icon -->
+                    </div>
+
+                    <div class="skill-bar">
+                        <h2>Problem Solving</h2>
+                        <i class="fa-solid fa-lightbulb fa-2xl"></i> <!-- Lightbulb (Problem Solving) icon -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
