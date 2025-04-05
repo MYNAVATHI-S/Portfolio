@@ -42,8 +42,59 @@
         .view-btn:hover {
             background-color: bisque;
             color: black;
+            animation: pulse 0.2s infinite alternate;
+
         }
+
+        @keyframes pulse {
+            0% { transform: scale(1.0) rotate(10deg); }
+            100% { transform: scale(1.1) rotate(-10deg); }
+        }
+        /* The loader animation (moving and scaling) */
+.loader {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: linear-gradient(50deg, #ff0c0c, #21d400);
+    animation: rotateAndColor 2.5s linear infinite;
+    position: relative;
+}
+.loader-container {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            pointer-events: none;
+            animation: scaleUp 0.5s linear;
+            opacity: 0.8;
+        }
+/* Keyframes for rotating and changing colors */
+@keyframes rotateAndColor {
+    0% {
+        transform: rotate(0deg);
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Scale-up effect for loader-container */
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
     </style>
+ <script>
+    document.querySelector(".view-btn").addEventListener("click", function() {
+        this.classList.toggle("clicked");
+    });
+</script>
 
 
 
@@ -62,49 +113,42 @@
                    <br>
                    <tr>
                        <th>Sl. No.</th>
-                       <th>Course Code</th>
                        <th>Course Title</th>
                        
                        <th>Action</th>
                    </tr>
                    <tr>
                        <td>1</td>
-                       <td>22PSPE01</td>
-                       <td>Computational Hardware</td>
+                       <td>Robotics Arm</td>
                        
-                       <td><button class="view-btn">View</button></td>
+                       <td><button class="view-btn"><a href="robotics.html">View</a></button></td>
                    </tr>
                    <tr>
                        <td>2</td>
-                       <td>22PSPE02</td>
                        <td>Coding for Innovators</td>
                        
                        <td><button class="view-btn"><a href="coding.html">View</a></button></td>
                    </tr>
                    <tr>
                        <td>3</td>
-                       <td>22PSPE03</td>
                        <td>Industrial Design & Rapid Prototype</td>
                      
                        <td><button class="view-btn"><a href="laser.html">View</a></button></td>
                    </tr>
                    <tr>
                        <td>4</td>
-                       <td>22PSOE01</td>
                        <td>Applied Design Thinking</td>
                       
                        <td><button class="view-btn">View</button></td>
                    </tr>
                    <tr>
                        <td>5</td>
-                       <td>22PSOE02</td>
                        <td>Startup Fundamentals</td>
                        
                        <td><button class="view-btn">View</button></td>
                    </tr>
                    <tr>
                        <td>6</td>
-                       <td>22PSOE03</td>
                        <td>System Thinking</td>
                        <td><button class="view-btn"><a href="system.html">View</a></button></td>
                       
@@ -123,6 +167,29 @@
                    function viewDetails(courseName) {
                        alert("Viewing details for: " + courseName);
                    }
+                   window.addEventListener("mousemove", function (e) {
+            // Create new loader container
+            var parent_div = document.createElement('div');
+            parent_div.className = "loader-container";
+
+            // Create the inner loader (circle)
+            var inner_div = document.createElement('div');
+            inner_div.className = "loader";
+            parent_div.appendChild(inner_div);
+
+            // Append the loader container to the body
+            var d = document.body.appendChild(parent_div);
+
+            // Set position based on mouse coordinates
+            parent_div.style.left = (e.clientX - 50) + 'px';
+            parent_div.style.top = (e.clientY - 50) + 'px';
+
+            // Limit the number of loader elements to 50
+            if (document.getElementsByClassName('loader-container').length > 50) {
+                var to_remove = document.getElementsByClassName('loader-container')[0];
+                document.body.removeChild(to_remove); // Remove the first loader container
+            }
+        });
                </script>
            
      
