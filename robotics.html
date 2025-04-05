@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Robotic Arm Assembly</title>
+    <style>
+            :root {
+            --bg-color: #1f242d;           /* Dark background color */
+            --second-bg-color: #323946;    /* Lighter background color for sections */
+            --text-color: #fff;            /* White text color */
+            --main-color: #0ef;            /* Blue color for highlights and animations */
+            --light-glow: rgba(0, 239, 255, 0.8); /* Light glow color for the sphere */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #34495e; /* Darker shade for the header */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.0rem;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--second-bg-color);
+            padding: 3rem;
+            border-radius: 10px;
+            width: 50%;
+            opacity: 0;
+            animation: fadeInSection 1s forwards;
+        }
+
+
+        section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(0, 239, 255, 0.8);
+        }
+
+        /* Fade-in animation for App section */
+        @keyframes fadeInSection {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+
+        /* Button Style */
+        button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: #16a085; /* Button background color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1abc9c; /* Lighter button color on hover */
+            transform: scale(1.05);
+        }
+
+        /* Box Animation */
+        .animated-box {
+            background-color: #34495e; /* Dark box color */
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            opacity: 0;
+            animation: boxSlideIn 1s forwards;
+        }
+
+        /* Slide-in and scale animation for boxes */
+        @keyframes boxSlideIn {
+            0% {
+                transform: translateY(30px) scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Video Section */
+        #videoContainer {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #videoContainer.show {
+            display: block;
+            opacity: 1;
+        }
+
+        video {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 8px;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #34495e; /* Same as header for consistency */
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .btn{
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #1f242d;
+    border-radius: 4rem;
+    font-size: 1.3rem;
+    color: white;
+    letter-spacing: 0.3rem;
+    font-weight: 400;
+    border: 2px solid #0ef;
+    transition: 0.3s ease;
+    cursor: pointer;
+    margin-left: -1250px;
+}
+.btn:hover{
+    transform: scale3d(1.03);
+    background-color: #0ef;
+    color:black;
+    box-shadow: 0 0 25px #0ef;
+}
+/* The loader animation (moving and scaling) */
+.loader {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: linear-gradient(50deg, #ff0c0c, #21d400);
+    animation: rotateAndColor 2.5s linear infinite;
+    position: relative;
+}
+.loader-container {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            pointer-events: none;
+            animation: scaleUp 0.5s linear;
+            opacity: 0.8;
+        }
+/* Keyframes for rotating and changing colors */
+@keyframes rotateAndColor {
+    0% {
+        transform: rotate(0deg);
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Scale-up effect for loader-container */
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <a href="assignment.html" class="btn">Assignment</a>
+    <header>
+        <h1> Robotic Arm Assembly Featuring Six Degrees of Freedom (DOF)</h1>
+    </header>
+<br><br>
+    <section class="overview">
+        <h2>1. Component Overview</h2>
+        <p>The robotic arm consists of the following primary modules:</p>
+        <ul>
+            <li><strong>Base Platform</strong> – Provides stability and supports rotational motion.</li>
+            <li><strong>Shoulder Assembly</strong> – Initiates vertical movement of the arm.</li>
+            <li><strong>Elbow Joint</strong> – Extends the mid-arm segment.</li>
+            <li><strong>Wrist Assembly</strong> – Enables angular and rotational adjustments.</li>
+            <li><strong>End Effector (Gripper)</strong> – Facilitates object manipulation.</li>
+            <li><strong>Fasteners and Couplers</strong> – Ensure structural integrity.</li>
+        </ul>
+    </section>
+
+
+    <br><br>
+    <section class="motion">
+        <h2>2. Joint Architecture and Motion Configuration (6+ DOF)</h2>
+        <p>The robotic arm features six fully functional joints, simulating a full range of industrial robotic operations:</p>
+        <ul>
+            <li><strong>Joint 1</strong>: Revolute joint for base yaw rotation.</li>
+            <li><strong>Joint 2</strong>: Revolute joint for shoulder pitch.</li>
+            <li><strong>Joint 3</strong>: Revolute joint for elbow articulation.</li>
+            <li><strong>Joint 4</strong>: Revolute joint for wrist pitch.</li>
+            <li><strong>Joint 5</strong>: Revolute joint for wrist roll.</li>
+            <li><strong>Joint 6</strong>: Gripper actuation (open/close via revolute or slider mechanism).</li>
+        </ul>
+    </section>
+    <br><br>
+    <section class="assembly">
+        <h2>3. Assembly Constraints & Engineering Techniques</h2>
+        <ul>
+            <li><strong>Revolute Constraints</strong>: Applied at key pivot points to enable realistic rotational movement.</li>
+            <li><strong>Rigid Constraints</strong>: Used to fix non-moving elements, ensuring stability.</li>
+            <li><strong>Motion Links</strong>: Utilized for synchronized movement between interconnected joints.</li>
+            <li><strong>As-Built Joints</strong>: Created where parts were modeled in place to preserve orientation.</li>
+            <li><strong>Contact Sets</strong>: Defined to simulate mechanical interference where applicable.</li>
+        </ul>
+    </section>
+    <br><br>
+    <section class="animation">
+        <h2>4. Animation Workflow</h2>
+        <p>The animation follows a step-by-step joint activation sequence:</p>
+        <ol>
+            <li>Base Rotation – Orients the entire arm assembly.</li>
+            <li>Shoulder Elevation – Raises the upper arm vertically.</li>
+            <li>Elbow Extension – Projects the midsection outward.</li>
+            <li>Wrist Pitch – Adjusts the vertical angle of the end segment.</li>
+            <li>Wrist Roll – Rotates the gripper for alignment.</li>
+            <li>Gripper Actuation – Opens and closes to simulate object handling.</li>
+        </ol>
+    </section>
+    <br><br>
+    <section class="video">
+        <h2>5. Video Export Specifications</h2>
+        <p>Below are the export specifications for the video:</p>
+        <ul>
+            <li><strong>Resolution</strong>: 1920 x 1080 pixels (Full HD)</li>
+            <li><strong>Frame Rate</strong>: 30 frames per second (FPS)</li>
+            <li><strong>Video Format</strong>: MP4</li>
+            <li><strong>Duration</strong>: ~30 to 45 seconds</li>
+            <li><strong>Quality Settings</strong>: High, with anti-aliasing enabled</li>
+        </ul><br><br>
+        <button id="playVideo">Play Animation Video</button>
+        <div id="videoContainer">
+            <video id="robotArmVideo" controls>
+                <source src="./assets/video/1 (1).mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("playVideo").addEventListener("click", function() {
+            const videoContainer = document.getElementById("videoContainer");
+            videoContainer.classList.add("show");
+            const video = document.getElementById("robotArmVideo");
+            video.play();
+        });
+        window.addEventListener("mousemove", function (e) {
+    // Create new loader container
+    var parent_div = document.createElement('div');
+    parent_div.className = "loader-container";
+
+    // Create the inner loader (circle)
+    var inner_div = document.createElement('div');
+    inner_div.className = "loader";
+    parent_div.appendChild(inner_div);
+
+    // Append the loader container to the body
+    var d = document.body.appendChild(parent_div);
+
+    // Set position based on mouse coordinates
+    parent_div.style.left = (e.clientX - 50) + 'px';
+    parent_div.style.top = (e.clientY - 50) + 'px';
+
+    // Limit the number of loader elements to 50
+    if (document.getElementsByClassName('loader-container').length > 50) {
+        var to_remove = document.getElementsByClassName('loader-container')[0];
+        document.body.removeChild(to_remove); // Remove the first loader container
+    }
+});
+
+    </script>
+
+</body>
+</html>
