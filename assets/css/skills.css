@@ -259,3 +259,92 @@ h3{
     color:black;
     box-shadow: 0 0 25px #0ef;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+#cards {
+  margin-top: 68px;
+  display: grid;
+  row-gap: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #ebf0ee;
+  border: 1px solid #c1c7d0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  align-items: center;
+  text-align: center;
+  min-height: 400px;
+}
+
+.card > h3 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-list > li {
+  background: #fff;
+  border-radius: 8px;
+  margin: 10px 8px 0 8px;
+  padding: 12px;
+  color: #36b37e;
+}
+/* The loader animation (moving and scaling) */
+.loader-container {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  animation: scaleUp 0.5s linear;
+  opacity: 0.8;
+}
+.loader {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: linear-gradient(50deg, #ff0c0c, #21d400);
+  animation: rotateAndColor 2.5s linear infinite;
+  position: relative;
+}
+
+/* Keyframes for rotating and changing colors */
+@keyframes rotateAndColor {
+  0% {
+      transform: rotate(0deg);
+      filter: hue-rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+      filter: hue-rotate(360deg);
+  }
+}
+
+/* Scale-up effect for loader-container */
+@keyframes scaleUp {
+  0% {
+      transform: scale(0.5);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
