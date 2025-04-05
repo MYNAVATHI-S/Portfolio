@@ -37,7 +37,28 @@ const typed = new Typed('.multiple-text',{
     loop:true
 });
 
+window.addEventListener("mousemove", function (e) {
+    // Create new loader container
+    var parent_div = document.createElement('div');
+    parent_div.className = "loader-container";
 
+    // Create the inner loader (circle)
+    var inner_div = document.createElement('div');
+    inner_div.className = "loader";
+    parent_div.appendChild(inner_div);
 
+    // Append the loader container to the body
+    document.body.appendChild(parent_div);
+
+    // Set position based on mouse coordinates
+    parent_div.style.left = (e.clientX - 50) + 'px';
+    parent_div.style.top = (e.clientY - 50) + 'px';
+
+    // Limit the number of loader elements to 50
+    if (document.getElementsByClassName('loader-container').length > 50) {
+        var to_remove = document.getElementsByClassName('loader-container')[0];
+        document.body.removeChild(to_remove); // Remove the first loader container
+    }
+});
 
 
