@@ -113,6 +113,44 @@
 .btn{
     margin-left: -1300px;
 }
+/* The loader animation (moving and scaling) */
+.loader {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: linear-gradient(50deg, #ff0c0c, #21d400);
+    animation: rotateAndColor 2.5s linear infinite;
+    position: relative;
+}
+.loader-container {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            pointer-events: none;
+            animation: scaleUp 0.5s linear;
+            opacity: 0.8;
+        }
+/* Keyframes for rotating and changing colors */
+@keyframes rotateAndColor {
+    0% {
+        transform: rotate(0deg);
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Scale-up effect for loader-container */
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 
     </style>
 </head>
@@ -225,6 +263,30 @@
 
    
 </section>
+<script>
+       window.addEventListener("mousemove", function (e) {
+            // Create new loader container
+            var parent_div = document.createElement('div');
+            parent_div.className = "loader-container";
 
+            // Create the inner loader (circle)
+            var inner_div = document.createElement('div');
+            inner_div.className = "loader";
+            parent_div.appendChild(inner_div);
+
+            // Append the loader container to the body
+            var d = document.body.appendChild(parent_div);
+
+            // Set position based on mouse coordinates
+            parent_div.style.left = (e.clientX - 50) + 'px';
+            parent_div.style.top = (e.clientY - 50) + 'px';
+
+            // Limit the number of loader elements to 50
+            if (document.getElementsByClassName('loader-container').length > 50) {
+                var to_remove = document.getElementsByClassName('loader-container')[0];
+                document.body.removeChild(to_remove); // Remove the first loader container
+            }
+        });
+</script>
 </body>
 </html>
