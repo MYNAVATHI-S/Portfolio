@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Thinking</title>
+    <link rel="stylesheet" href="./assets/css/Site.css">
+    <script src="assets/js/Site.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1f242d;
+            color: #fff;
+            padding: 50px;
+            animation: fadeIn 2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+            animation: glowingText 3s ease-in-out infinite alternate;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        /* Glow animation for text */
+        @keyframes glowingText {
+            0% {
+                color: #fff;
+                text-shadow: 0 0 10px #0ef, 0 0 20px #0ef, 0 0 30px #0ef;
+            }
+            100% {
+                color: #0ef;
+                text-shadow: 0 0 20px #0ef, 0 0 40px #0ef, 0 0 60px #0ef;
+            }
+        }
+
+        /* Animation for fade-in effect */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Education Section */
+        .education-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .education {
+            background-color: #323946;
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            width: 45%;
+            min-width: 300px;
+            height: auto;
+            animation: slideUp 0.5s ease-in-out;
+        }
+
+        .education h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .education ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .education ul li {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .education ul li strong {
+            font-size: 25px;
+        }
+
+        /* Slide-up animation for the education box */
+        @keyframes slideUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Style for images inside education section */
+        .education img {
+            width: 60%;
+            height: 490px;
+            border-radius: 10%;
+            margin-left: 120px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Scale image effect on hover */
+        .education img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Box shadow for the education box */
+        .education:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+        }
+
+        .btn{
+    display: inline-block;
+    padding: 1.5rem 2.5rem;
+    background-color: #1f242d;
+    border-radius: 4rem;
+    font-size: 1.7rem;
+    color: white;
+    letter-spacing: 0.3rem;
+    font-weight: 500;
+    border: 2px solid #0ef;
+    transition: 0.3s ease;
+    cursor: pointer;
+    margin-left: -1250px;
+}
+.btn:hover{
+    transform: scale3d(1.03);
+    background-color: #0ef;
+    color:black;
+    box-shadow: 0 0 25px #0ef;
+}
+
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn">Home</a>
+    <h1>Education Details</h1><br><br><br><br>
+    
+    <!-- Education Details Section -->
+    <div class="education-container">
+        <!-- Diploma Section -->
+        <section class="education"><br><br>
+            <img src="./assets/images/edu.png" alt="Diploma Icon">
+            <ul><br><br>
+                <li><strong>Diploma (EEE)</strong> - CSI Polytechnic College, Salem</li>
+            </ul>
+        </section>
+        
+        <!-- B.E Section -->
+        <section class="education"><br><br>
+            <img src="./assets/images/edu 1.jpg" alt="B.E Icon">
+            <ul><br><br>
+                <li><strong>Pursuing B.E (ECE)</strong> - Government College of Engineering, Salem</li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        window.addEventListener("mousemove", function (e) {
+            // Create new loader container
+            var parent_div = document.createElement('div');
+            parent_div.className = "loader-container";
+
+            // Create the inner loader (circle)
+            var inner_div = document.createElement('div');
+            inner_div.className = "loader";
+            parent_div.appendChild(inner_div);
+
+            // Append the loader container to the body
+            var d = document.body.appendChild(parent_div);
+
+            // Set position based on mouse coordinates
+            parent_div.style.left = (e.clientX - 50) + 'px';
+            parent_div.style.top = (e.clientY - 50) + 'px';
+
+            // Limit the number of loader elements to 50
+            if (document.getElementsByClassName('loader-container').length > 50) {
+                var to_remove = document.getElementsByClassName('loader-container')[0];
+                document.body.removeChild(to_remove); // Remove the first loader container
+            }
+        });
+    </script>
+
+</body>
+</html>
