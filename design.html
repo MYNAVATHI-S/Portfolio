@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Thinking</title>
+    <link rel="stylesheet" href="./assets/css/Site.css">
+    <script src="assets\js\Site.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            --bg-color: #1f242d;           /* Dark background color */
+            --second-bg-color: #323946;    /* Lighter background color for sections */
+            --text-color: #fff;         
+            text-align: center;
+            padding: 50px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        h1 {
+            color: #333;
+            animation: glowingText 3s ease-in-out infinite alternate;
+            font-size: 32px;
+        }
+        p {
+            color: #fff;
+            font-size: 20px;
+        }
+        .content {
+            margin-bottom: 40px;
+            animation: slideIn 1s ease-in-out;
+        }
+        .embed-container {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: bounceIn 1s ease-in-out;
+        }
+        .embed-container:hover {
+            transform: translateY(10px);
+            box-shadow: 0 0 20px rgba(0, 239, 255, 0.8);
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            animation: fadeInIframe 2s ease-in-out;
+        }
+        a {
+            color: #0ef;
+            font-size: 2rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+        .instructions {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        /* Animation for glowing text effect */
+        @keyframes glowingText {
+            0% {
+                color: #fff;
+                text-shadow: 0 0 10px #0ef, 0 0 20px #0ef, 0 0 30px #0ef;
+            }
+            100% {
+                color: #0ef;
+                text-shadow: 0 0 20px #0ef, 0 0 40px #0ef, 0 0 60px #0ef;
+            }
+        }
+
+        /* Slide-in animation */
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Bounce-in animation for iframe container */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Fade-in animation for iframe */
+        @keyframes fadeInIframe {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        .btn{
+    margin-left: -1300px;
+}
+        /* The loader animation (moving and scaling) */
+        .loader {
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background: linear-gradient(50deg, #ff0c0c, #21d400);
+            animation: rotateAndColor 2.5s linear infinite;
+            position: relative;
+        }
+        .loader-container {
+                    position: absolute;
+                    width: 50px;
+                    height: 50px;
+                    pointer-events: none;
+                    animation: scaleUp 0.5s linear;
+                    opacity: 0.8;
+                }
+        /* Keyframes for rotating and changing colors */
+        @keyframes rotateAndColor {
+            0% {
+                transform: rotate(0deg);
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        /* Scale-up effect for loader-container */
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>FORENSIX</h1>    <br><br>
+    <a href="assignment.html" class="btn">Assignment</a>
+    <br><br>
+    <div class="content">
+        <div class="embed-container">
+            <iframe src="https://docs.google.com/presentation/d/1Is0gvyytHeXxFLYwtM8AM58u_8Fm8P0JY8HP8erdXKo/embed?start=false&loop=false&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+        </div>
+    </div>
+
+    <div class="instructions">
+        <p>If the presentation is not working properly, you can <a href="https://docs.google.com/presentation/d/1Is0gvyytHeXxFLYwtM8AM58u_8Fm8P0JY8HP8erdXKo/edit#slide=id.g33f0817a7a3_0_123" target="_blank">click here to view the presentation directly on Google Slides</a>.</p>
+        
+    </div>
+<script>
+       window.addEventListener("mousemove", function (e) {
+            // Create new loader container
+            var parent_div = document.createElement('div');
+            parent_div.className = "loader-container";
+
+            // Create the inner loader (circle)
+            var inner_div = document.createElement('div');
+            inner_div.className = "loader";
+            parent_div.appendChild(inner_div);
+
+            // Append the loader container to the body
+            var d = document.body.appendChild(parent_div);
+
+            // Set position based on mouse coordinates
+            parent_div.style.left = (e.clientX - 50) + 'px';
+            parent_div.style.top = (e.clientY - 50) + 'px';
+
+            // Limit the number of loader elements to 50
+            if (document.getElementsByClassName('loader-container').length > 50) {
+                var to_remove = document.getElementsByClassName('loader-container')[0];
+                document.body.removeChild(to_remove); // Remove the first loader container
+            }
+        });
+</script>
+</body>
+</html>
