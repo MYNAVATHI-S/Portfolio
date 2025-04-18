@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamp Light Sphere Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./assets/css/Site.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        :root {
+            --bg-color: #1f242d;           /* Dark background color */
+            --second-bg-color: #323946;    /* Lighter background color for sections */
+            --text-color: #fff;            /* White text color */
+            --main-color: #0ef;            /* Blue color for highlights and animations */
+            --light-glow: rgba(0, 239, 255, 0.8); /* Light glow color for the sphere */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            font-size: 65.5%;
+            height: 100%;
+        }
+
+        body {
+            color: var(--text-color);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 1.6rem;
+           margin-top: -20px;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            margin-top:100px ;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--main-color);
+            margin-top: 150px;
+        }
+
+        .step {
+            margin-bottom: 2rem;
+            background-color: var(--second-bg-color);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: slideIn 1s forwards;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Slide-in Animation for Boxes */
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Hover effect for the boxes */
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(0, 239, 255, 0.8);
+        }
+
+        h2 {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            color: var(--main-color);
+            margin-top: -80px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        p, li {
+            font-weight: 300;
+            font-size: 1.6rem;
+        }
+
+        .step img {
+    max-width: 100%; /* Image won't exceed container's width */
+    max-height: 300px; /* Limit the height to 300px */
+    height: auto; /* Maintain aspect ratio */
+}
+.btn{
+    margin-left: -1300px;
+}
+/* Main cursor: rotating conic-gradient + pulse with dark background */
+.cursor {
+    position:absolute;
+    width:24px; height:24px;
+    border-radius:50%;
+    background: conic-gradient(
+      #ff0044, #ff6600, #ffcc00, #00cc66,
+      #0066ff, #6600cc, #ff00cc, #ff0044
+    );
+    box-shadow: 0 0 12px rgba(255,255,255,0.2),
+                0 0 24px rgba(255,255,255,0.1);
+    transform: translate(-50%,-50%);
+    pointer-events:none;
+    animation:
+      spin 5s linear infinite,
+      pulse 1.5s ease-in-out infinite,
+      rainbowColorChange 7s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: translate(-50%,-50%) rotate(360deg); }
+  }
+  @keyframes pulse {
+    0%,100% { transform: translate(-50%,-50%) scale(0.8); opacity:1; }
+    50%     { transform: translate(-50%,-50%) scale(1.2); opacity:0.6; }
+  }
+
+  /* Rainbow color change animation */
+  @keyframes rainbowColorChange {
+    0% { background: conic-gradient(#ff0044, #ff6600, #ffcc00, #00cc66, #0066ff, #6600cc, #ff00cc, #ff0044); }
+    50% { background: conic-gradient(#6600cc, #0066ff, #00cc66, #ffcc00, #ff6600, #ff0044, #ff00cc, #6600cc); }
+    100% { background: conic-gradient(#ff0044, #ff6600, #ffcc00, #00cc66, #0066ff, #6600cc, #ff00cc, #ff0044); }
+  }
+
+  /* Trail dots: fading circles with rainbow fading */
+  .trail {
+    position:absolute;
+    width:12px; height:12px;
+    border-radius:50%;
+    background: rgba(255,255,255,0.1);
+    pointer-events:none;
+    animation: trailFade 1.2s ease-out forwards, rainbowFade 1.5s ease-in-out infinite;
+    transform: translate(-50%,-50%);
+  }
+
+  @keyframes trailFade {
+    to { transform: translate(-50%,-50%) scale(0); opacity:0; }
+  }
+
+  @keyframes rainbowFade {
+    0% { background: #ff0044; }
+    20% { background: #ff6600; }
+    40% { background: #ffcc00; }
+    60% { background: #00cc66; }
+    80% { background: #0066ff; }
+    100% { background: #6600cc; }
+  }
+
+  /* Sparkle stars: small rotating bursts with rainbow color */
+  .sparkle {
+    position:absolute;
+    width:6px; height:6px;
+    background: white;
+    clip-path: polygon(
+      50% 0%, 61% 35%, 98% 35%,
+      68% 57%, 79% 91%, 50% 70%,
+      21% 91%, 32% 57%, 2% 35%,
+      39% 35%
+    );
+    pointer-events:none;
+    animation: sparkleAnim 0.7s ease-out forwards,
+               sparkleSpin 1s linear infinite,
+               sparkleFade 0.5s ease-out forwards,
+               rainbowSparkle 1.5s ease-in-out infinite;
+  }
+
+  @keyframes sparkleAnim {
+    0%   { transform: scale(0); opacity:1; }
+    50%  { transform: scale(1); opacity:0.8; }
+    100% { transform: scale(0); opacity:0; }
+  }
+  @keyframes sparkleSpin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes sparkleFade {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes rainbowSparkle {
+    0% { background: #ff0044; }
+    25% { background: #ff6600; }
+    50% { background: #ffcc00; }
+    75% { background: #00cc66; }
+    100% { background: #0066ff; }
+  }
+
+  /* Click ripple: expanding ring */
+  .ripple {
+    position:absolute;
+    width:0; height:0;
+    border:2px solid rgba(255,255,255,0.5);
+    border-radius:50%;
+    pointer-events:none;
+    transform: translate(-50%,-50%);
+    animation: rippleExpand 0.6s ease-out forwards;
+  }
+  @keyframes rippleExpand {
+    to {
+      width:120px; height:120px;
+      opacity:0;
+    }
+  }
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+   
+    <header>
+  
+              <h1>Lamp Light Sphere Design</h1>
+    </header>
+    <a href="assignment.html" class="btn">Assignment</a>
+    <section class="design-methodology">
+        <h2>Design Methodology</h2>
+        <br>
+        <div class="step" id="step1">
+            <h3>1. Basic Structure</h3>
+            <ul>
+                <li><strong>Sphere:</strong> To define the overall shape.</li>
+                <li><strong>Ribs:</strong> Created using splines or arc-based sketches.</li>
+                <li><strong>Rings:</strong> Created using circles and cutouts for rib slots.</li>
+            </ul><br><br>
+            <img src="./assets/images/photo.png" alt="Step 1 Image">
+        </div>
+
+        <div class="step" id="step2">
+            <h3>2. Dimensions and Number of Shapes</h3>
+            <ul>
+                <li><strong>Sphere diameter:</strong> 50 mm</li>
+                <li><strong>Ribs:</strong>
+                    <ul>
+                        <li>Number of ribs: About 8 (based on spacing and look)</li>
+                        <li>Rib thickness: ~2 mm</li>
+                        <li>Rib height: 50 mm (same as sphere diameter)</li>
+                        <li>Rib spacing: 360° ÷ number of ribs.</li>
+                    </ul>
+                </li>
+            </ul><br><br>
+            <img src="./assets/images/photo1.png" alt="Step 2 Image">
+        </div>
+
+        <div class="step" id="step3">
+            <h3>3. Design the Horizontal Rings</h3>
+            <p><strong>Steps:</strong></p>
+            <ol>
+                <li>Create a new sketch on the XZ plane.</li>
+                <li>Draw a circle:
+                    <ul>
+                        <li>Outer diameter = 50 mm</li>
+                        <li>Inner hole for light socket = 20 mm</li>
+                        <li>Thickness = 2 mm</li>
+                    </ul>
+                </li>
+                <li>Cut slots in the ring:
+                    <ul>
+                        <li>Draw thin slots to hold the ribs.</li>
+                        <li>Width of slots = rib thickness (2 mm).</li>
+                        <li>Number of slots = number of ribs.</li>
+                    </ul>
+                </li>
+                <li>Extrude the ring:
+                    <ul>
+                        <li>Extrude to a thickness of 2 mm.</li>
+                    </ul>
+                </li>
+                <li>Create 2 to 3 rings:
+                    <ul>
+                        <li>One at the top, one in the middle, and one at the bottom.</li>
+                    </ul>
+                </li>
+            </ol><br><br>
+            <img src="./assets/images/photo2.png" alt="Step 3 Image">
+        </div>
+
+        <div class="step" id="step4">
+            <h3>4. Steps in Fusion 360</h3>
+            <ol>
+                <li>Create a sphere of diameter 50 mm as a reference.</li>
+                <li>Sketch and extrude a rib profile (height = 50 mm, thickness = 2 mm).</li>
+                <li>Use the circular pattern tool to replicate the rib around the sphere's center.</li>
+                <li>Create a horizontal ring by sketching a circle and cutting out slots to fit the ribs.</li>
+                <li>Use join or cut operations to make the assembly functional.</li>
+                <li>Add fillets or chamfers to smooth out the edges.</li>
+            </ol>
+            <img src="./assets/images/step4-image.png" alt="Step 4 Image">
+        </div>
+
+        <div class="step" id="step5">
+            <h3>5. Assembly and Final Touch</h3>
+            <ul>
+                <li>Make sure the ribs fit properly into the ring slots.</li>
+                <li>Adjust spacing and dimensions if needed.</li>
+                <li>Use the Combine tool to merge all components into a single body.</li>
+                <li>Apply Fillets to smooth edges and improve aesthetics.</li>
+            </ul><br><br>
+            <img src="./assets/images/1.jpg" alt="Step 5 Image">
+        </div>
+
+        <div class="step" id="step6">
+            <h3>6. LaserCAD</h3>
+            <ul>
+                <li> In the Browser Panel, find the sketch you created.</li>
+                <li>Right-click on the Sketch → Save as DXF.</li>
+                <li>Choose a location to save the DXF file.</li>
+                <li>Now, you can import this DXF into LaserCAD for laser cutting.</li>
+            </ul><br><br>
+            <img src="./assets/images/laser.png" alt="Step 6 Image">
+        </div>
+    </section>
+
+   
+</section>
+<script>
+      const cursor = document.querySelector('.cursor');
+
+document.addEventListener('mousemove', e => {
+  const x = e.clientX, y = e.clientY;
+  cursor.style.left = x + 'px';
+  cursor.style.top  = y + 'px';
+
+  // Trail dot with rainbow fade
+  const t = document.createElement('div');
+  t.className = 'trail';
+  t.style.left = x + 'px';
+  t.style.top  = y + 'px';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 1200);
+
+  // Sparkle star (40% chance per move for more sparkle)
+  if (Math.random() < 0.4) {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    // random offset for sparkles
+    s.style.left = (x + (Math.random() * 30 - 15)) + 'px';
+    s.style.top  = (y + (Math.random() * 30 - 15)) + 'px';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 700);
+  }
+});
+
+// Click ripple effect
+document.addEventListener('click', e => {
+  const r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.left = e.clientX + 'px';
+  r.style.top  = e.clientY + 'px';
+  document.body.appendChild(r);
+  setTimeout(() => r.remove(), 600);
+});
+</script>
+</body>
+</html>

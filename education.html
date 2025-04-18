@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>education</title>
+    <link rel="stylesheet" href="./assets/css/Site.css">
+    <script src="assets/js/Site.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1f242d;
+            color: #fff;
+            padding: 50px;
+            animation: fadeIn 2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: none; /* Hide default cursor */
+        }
+        h1 {
+            color: #333;
+            animation: glowingText 3s ease-in-out infinite alternate;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        /* Glow animation for text */
+        @keyframes glowingText {
+            0% {
+                color: #fff;
+                text-shadow: 0 0 10px #0ef, 0 0 20px #0ef, 0 0 30px #0ef;
+            }
+            100% {
+                color: #0ef;
+                text-shadow: 0 0 20px #0ef, 0 0 40px #0ef, 0 0 60px #0ef;
+            }
+        }
+
+        /* Animation for fade-in effect */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Education Section */
+        .education-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .education {
+            background-color: #323946;
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            width: 45%;
+            min-width: 300px;
+            height: auto;
+            animation: slideUp 0.5s ease-in-out;
+        }
+
+        .education h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .education ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .education ul li {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .education ul li strong {
+            font-size: 25px;
+        }
+
+        /* Slide-up animation for the education box */
+        @keyframes slideUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Style for images inside education section */
+        .education img {
+            width: 60%;
+            height: 400px;
+            border-radius: 10%;
+            margin-left: 120px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Scale image effect on hover */
+        .education img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Box shadow for the education box */
+        .education:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.5rem 2.5rem;
+            background-color: #1f242d;
+            border-radius: 4rem;
+            font-size: 1.7rem;
+            color: white;
+            letter-spacing: 0.3rem;
+            font-weight: 500;
+            border: 2px solid #0ef;
+            transition: 0.3s ease;
+            cursor: pointer;
+            margin-left: -1250px;
+        }
+
+        .btn:hover {
+            transform: scale3d(1.03);
+            background-color: #0ef;
+            color: black;
+            box-shadow: 0 0 25px #0ef;
+        }
+
+        /* Custom mouse pointer style */
+        .cursor {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #0ef;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: width 0.1s, height 0.1s;
+            z-index: 9999;
+        }
+
+        /* Sparkle effect when cursor moves */
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 0.7s ease-out forwards, sparkleMove 1s ease-out infinite;
+        }
+
+        @keyframes sparkleAnim {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes sparkleMove {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(5px, -5px); }
+            50% { transform: translate(-5px, 5px); }
+            75% { transform: translate(3px, 3px); }
+            100% { transform: translate(-3px, -3px); }
+        }
+
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn">Home</a>
+    <h1>Education Details</h1><br><br><br><br>
+    
+    <!-- Education Details Section -->
+    <div class="education-container">
+        <!-- Diploma Section -->
+        <section class="education"><br><br>
+            <img src="./assets/images/edu.png" alt="Diploma Icon">
+            <ul><br><br>
+                <li><strong>Diploma (EEE)</strong> - CSI Polytechnic College, Salem</li>
+            </ul>
+        </section>
+        
+        <!-- B.E Section -->
+        <section class="education"><br><br>
+            <img src="./assets/images/edu 1.jpg" alt="B.E Icon">
+            <ul><br><br>
+                <li><strong>Pursuing B.E (ECE)</strong> - Government College of Engineering, Salem</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Custom cursor and sparkle effect script -->
+    <script>
+        document.addEventListener('mousemove', function (e) {
+            let cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                cursor = document.createElement('div');
+                cursor.classList.add('cursor');
+                document.body.appendChild(cursor);
+            }
+            
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            // Generate multiple sparkles at once for a more dramatic effect
+            for (let i = 0; i < 5; i++) {
+                let sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = (e.clientX + Math.random() * 20 - 10) + 'px'; // Randomize position
+                sparkle.style.top = (e.clientY + Math.random() * 20 - 10) + 'px';  // Randomize position
+                document.body.appendChild(sparkle);
+
+                // Remove sparkle after animation
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000); // Sparkle duration
+            }
+        });
+    </script>
+</body>
+</html>
