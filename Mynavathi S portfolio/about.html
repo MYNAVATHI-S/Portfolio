@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./assets/css/Site.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <div class="cursor"></div>
+    <header>
+    <section class="about" id="about">
+        <a href="index.html" class="btn">Home</a><br>
+        <div class="about-img">
+            
+
+            <img src="./assets/images/myna.jpg" alt="">
+        </div>
+
+        <div class="about-content">
+          <center>  <h2 class="heading">About <span>Me</span></h2></center><br>
+            <h3>Software Developer</h3>
+            <p>Hi, I'm Mynavathi S, an passionate and aspiring software developer with a strong foundation in web technologies and prototyping.<span id="dots">...</span><span id="more"> My journey in software development has been driven by a passion for creating innovative solutions and enhancing user experiences through technology. I'm particularly fascinated by the practical applications of technology, such as laser cutting methods, and continuously seek to explore new advancements and techniques. My commitment to staying updated with the latest trends in the tech industry ensures that I bring fresh and relevant insights to every project I undertake.
+Throughout my career, I've had the opportunity to work on several successful projects, earning recognition for my dedication and expertise. My ability to break down complex concepts and present them in an engaging manner has been one of my key strengths.</span></p>
+<button onclick="myFunction()" id="myBtn">Read more</button>    
+
+        </div>
+    
+        
+      
+    
+    
+    </section>
+</header>
+
+
+
+<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+    function myFunction() {
+  var dots = document.getElementById("dots");
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("myBtn");
+
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "Read more"; 
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "Read less"; 
+    moreText.style.display = "inline";
+  }
+}
+
+
+        const cursor = document.querySelector('.cursor');
+
+document.addEventListener('mousemove', e => {
+  const x = e.clientX, y = e.clientY;
+  cursor.style.left = x + 'px';
+  cursor.style.top  = y + 'px';
+
+  // Trail dot with rainbow fade
+  const t = document.createElement('div');
+  t.className = 'trail';
+  t.style.left = x + 'px';
+  t.style.top  = y + 'px';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 1200);
+
+  // Sparkle star (40% chance per move for more sparkle)
+  if (Math.random() < 0.4) {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    // random offset for sparkles
+    s.style.left = (x + (Math.random() * 30 - 15)) + 'px';
+    s.style.top  = (y + (Math.random() * 30 - 15)) + 'px';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 700);
+  }
+});
+
+// Click ripple effect
+document.addEventListener('click', e => {
+  const r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.left = e.clientX + 'px';
+  r.style.top  = e.clientY + 'px';
+  document.body.appendChild(r);
+  setTimeout(() => r.remove(), 600);
+});
+
+</script>
+</body>
+</html>
