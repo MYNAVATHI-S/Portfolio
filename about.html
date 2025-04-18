@@ -11,7 +11,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    
+  <div class="cursor"></div>
     <header>
     <section class="about" id="about">
         <a href="index.html" class="btn">Home</a><br>
@@ -57,29 +57,45 @@ Throughout my career, I've had the opportunity to work on several successful pro
     moreText.style.display = "inline";
   }
 }
-window.addEventListener("mousemove", function (e) {
-            // Create new loader container
-            var parent_div = document.createElement('div');
-            parent_div.className = "loader-container";
 
-            // Create the inner loader (circle)
-            var inner_div = document.createElement('div');
-            inner_div.className = "loader";
-            parent_div.appendChild(inner_div);
 
-            // Append the loader container to the body
-            var d = document.body.appendChild(parent_div);
+        const cursor = document.querySelector('.cursor');
 
-            // Set position based on mouse coordinates
-            parent_div.style.left = (e.clientX - 50) + 'px';
-            parent_div.style.top = (e.clientY - 50) + 'px';
+document.addEventListener('mousemove', e => {
+  const x = e.clientX, y = e.clientY;
+  cursor.style.left = x + 'px';
+  cursor.style.top  = y + 'px';
 
-            // Limit the number of loader elements to 50
-            if (document.getElementsByClassName('loader-container').length > 50) {
-                var to_remove = document.getElementsByClassName('loader-container')[0];
-                document.body.removeChild(to_remove); // Remove the first loader container
-            }
-        });
+  // Trail dot with rainbow fade
+  const t = document.createElement('div');
+  t.className = 'trail';
+  t.style.left = x + 'px';
+  t.style.top  = y + 'px';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 1200);
+
+  // Sparkle star (40% chance per move for more sparkle)
+  if (Math.random() < 0.4) {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    // random offset for sparkles
+    s.style.left = (x + (Math.random() * 30 - 15)) + 'px';
+    s.style.top  = (y + (Math.random() * 30 - 15)) + 'px';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 700);
+  }
+});
+
+// Click ripple effect
+document.addEventListener('click', e => {
+  const r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.left = e.clientX + 'px';
+  r.style.top  = e.clientY + 'px';
+  document.body.appendChild(r);
+  setTimeout(() => r.remove(), 600);
+});
+
 </script>
 </body>
 </html>

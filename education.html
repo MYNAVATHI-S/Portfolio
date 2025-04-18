@@ -16,6 +16,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            cursor: none; /* Hide default cursor */
         }
         h1 {
             color: #333;
@@ -118,26 +119,65 @@
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
         }
 
-        .btn{
-    display: inline-block;
-    padding: 1.5rem 2.5rem;
-    background-color: #1f242d;
-    border-radius: 4rem;
-    font-size: 1.7rem;
-    color: white;
-    letter-spacing: 0.3rem;
-    font-weight: 500;
-    border: 2px solid #0ef;
-    transition: 0.3s ease;
-    cursor: pointer;
-    margin-left: -1250px;
-}
-.btn:hover{
-    transform: scale3d(1.03);
-    background-color: #0ef;
-    color:black;
-    box-shadow: 0 0 25px #0ef;
-}
+        .btn {
+            display: inline-block;
+            padding: 1.5rem 2.5rem;
+            background-color: #1f242d;
+            border-radius: 4rem;
+            font-size: 1.7rem;
+            color: white;
+            letter-spacing: 0.3rem;
+            font-weight: 500;
+            border: 2px solid #0ef;
+            transition: 0.3s ease;
+            cursor: pointer;
+            margin-left: -1250px;
+        }
+
+        .btn:hover {
+            transform: scale3d(1.03);
+            background-color: #0ef;
+            color: black;
+            box-shadow: 0 0 25px #0ef;
+        }
+
+        /* Custom mouse pointer style */
+        .cursor {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #0ef;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: width 0.1s, height 0.1s;
+            z-index: 9999;
+        }
+
+        /* Sparkle effect when cursor moves */
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 0.7s ease-out forwards, sparkleMove 1s ease-out infinite;
+        }
+
+        @keyframes sparkleAnim {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes sparkleMove {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(5px, -5px); }
+            50% { transform: translate(-5px, 5px); }
+            75% { transform: translate(3px, 3px); }
+            100% { transform: translate(-3px, -3px); }
+        }
 
     </style>
 </head>
@@ -164,31 +204,33 @@
         </section>
     </div>
 
+    <!-- Custom cursor and sparkle effect script -->
     <script>
-        window.addEventListener("mousemove", function (e) {
-            // Create new loader container
-            var parent_div = document.createElement('div');
-            parent_div.className = "loader-container";
+        document.addEventListener('mousemove', function (e) {
+            let cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                cursor = document.createElement('div');
+                cursor.classList.add('cursor');
+                document.body.appendChild(cursor);
+            }
+            
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
 
-            // Create the inner loader (circle)
-            var inner_div = document.createElement('div');
-            inner_div.className = "loader";
-            parent_div.appendChild(inner_div);
+            // Generate multiple sparkles at once for a more dramatic effect
+            for (let i = 0; i < 5; i++) {
+                let sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = (e.clientX + Math.random() * 20 - 10) + 'px'; // Randomize position
+                sparkle.style.top = (e.clientY + Math.random() * 20 - 10) + 'px';  // Randomize position
+                document.body.appendChild(sparkle);
 
-            // Append the loader container to the body
-            var d = document.body.appendChild(parent_div);
-
-            // Set position based on mouse coordinates
-            parent_div.style.left = (e.clientX - 50) + 'px';
-            parent_div.style.top = (e.clientY - 50) + 'px';
-
-            // Limit the number of loader elements to 50
-            if (document.getElementsByClassName('loader-container').length > 50) {
-                var to_remove = document.getElementsByClassName('loader-container')[0];
-                document.body.removeChild(to_remove); // Remove the first loader container
+                // Remove sparkle after animation
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000); // Sparkle duration
             }
         });
     </script>
-
 </body>
 </html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Dark Rainbow Sparkle Cursor</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background:#1a1a1a;
+      cursor:none;
+      overflow:hidden;
+      height:100vh;
+    }
+
+    /* Main cursor: rotating conic-gradient + pulse with dark background */
+    .cursor {
+      position:absolute;
+      width:24px; height:24px;
+      border-radius:50%;
+      background: conic-gradient(
+        #ff0044, #ff6600, #ffcc00, #00cc66,
+        #0066ff, #6600cc, #ff00cc, #ff0044
+      );
+      box-shadow: 0 0 12px rgba(255,255,255,0.2),
+                  0 0 24px rgba(255,255,255,0.1);
+      transform: translate(-50%,-50%);
+      pointer-events:none;
+      animation:
+        spin 5s linear infinite,
+        pulse 1.5s ease-in-out infinite,
+        rainbowColorChange 7s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: translate(-50%,-50%) rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%,100% { transform: translate(-50%,-50%) scale(0.8); opacity:1; }
+      50%     { transform: translate(-50%,-50%) scale(1.2); opacity:0.6; }
+    }
+
+    /* Rainbow color change animation */
+    @keyframes rainbowColorChange {
+      0% { background: conic-gradient(#ff0044, #ff6600, #ffcc00, #00cc66, #0066ff, #6600cc, #ff00cc, #ff0044); }
+      50% { background: conic-gradient(#6600cc, #0066ff, #00cc66, #ffcc00, #ff6600, #ff0044, #ff00cc, #6600cc); }
+      100% { background: conic-gradient(#ff0044, #ff6600, #ffcc00, #00cc66, #0066ff, #6600cc, #ff00cc, #ff0044); }
+    }
+
+    /* Trail dots: fading circles with rainbow fading */
+    .trail {
+      position:absolute;
+      width:12px; height:12px;
+      border-radius:50%;
+      background: rgba(255,255,255,0.1);
+      pointer-events:none;
+      animation: trailFade 1.2s ease-out forwards, rainbowFade 1.5s ease-in-out infinite;
+      transform: translate(-50%,-50%);
+    }
+
+    @keyframes trailFade {
+      to { transform: translate(-50%,-50%) scale(0); opacity:0; }
+    }
+
+    @keyframes rainbowFade {
+      0% { background: #ff0044; }
+      20% { background: #ff6600; }
+      40% { background: #ffcc00; }
+      60% { background: #00cc66; }
+      80% { background: #0066ff; }
+      100% { background: #6600cc; }
+    }
+
+    /* Sparkle stars: small rotating bursts with rainbow color */
+    .sparkle {
+      position:absolute;
+      width:6px; height:6px;
+      background: white;
+      clip-path: polygon(
+        50% 0%, 61% 35%, 98% 35%,
+        68% 57%, 79% 91%, 50% 70%,
+        21% 91%, 32% 57%, 2% 35%,
+        39% 35%
+      );
+      pointer-events:none;
+      animation: sparkleAnim 0.7s ease-out forwards,
+                 sparkleSpin 1s linear infinite,
+                 sparkleFade 0.5s ease-out forwards,
+                 rainbowSparkle 1.5s ease-in-out infinite;
+    }
+
+    @keyframes sparkleAnim {
+      0%   { transform: scale(0); opacity:1; }
+      50%  { transform: scale(1); opacity:0.8; }
+      100% { transform: scale(0); opacity:0; }
+    }
+    @keyframes sparkleSpin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes sparkleFade {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes rainbowSparkle {
+      0% { background: #ff0044; }
+      25% { background: #ff6600; }
+      50% { background: #ffcc00; }
+      75% { background: #00cc66; }
+      100% { background: #0066ff; }
+    }
+
+    /* Click ripple: expanding ring */
+    .ripple {
+      position:absolute;
+      width:0; height:0;
+      border:2px solid rgba(255,255,255,0.5);
+      border-radius:50%;
+      pointer-events:none;
+      transform: translate(-50%,-50%);
+      animation: rippleExpand 0.6s ease-out forwards;
+    }
+    @keyframes rippleExpand {
+      to {
+        width:120px; height:120px;
+        opacity:0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  <script>
+    const cursor = document.querySelector('.cursor');
+
+    document.addEventListener('mousemove', e => {
+      const x = e.clientX, y = e.clientY;
+      cursor.style.left = x + 'px';
+      cursor.style.top  = y + 'px';
+
+      // Trail dot with rainbow fade
+      const t = document.createElement('div');
+      t.className = 'trail';
+      t.style.left = x + 'px';
+      t.style.top  = y + 'px';
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 1200);
+
+      // Sparkle star (40% chance per move for more sparkle)
+      if (Math.random() < 0.4) {
+        const s = document.createElement('div');
+        s.className = 'sparkle';
+        // random offset for sparkles
+        s.style.left = (x + (Math.random() * 30 - 15)) + 'px';
+        s.style.top  = (y + (Math.random() * 30 - 15)) + 'px';
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 700);
+      }
+    });
+
+    // Click ripple effect
+    document.addEventListener('click', e => {
+      const r = document.createElement('div');
+      r.className = 'ripple';
+      r.style.left = e.clientX + 'px';
+      r.style.top  = e.clientY + 'px';
+      document.body.appendChild(r);
+      setTimeout(() => r.remove(), 600);
+    });
+  </script>
+</body>
+</html>
