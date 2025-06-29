@@ -580,6 +580,22 @@ animateParticles();
       }, 1000);
     });
   </script>
+<script>
+  const cursor = document.getElementById('cursorDot');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.pageX + 'px';
+    cursor.style.top = e.pageY + 'px';
+
+    // Optional sparkle trail:
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = e.pageX + 'px';
+    sparkle.style.top = e.pageY + 'px';
+    sparkle.style.background = `hsl(${Math.random() * 360}, 100%, 75%)`;
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 1000);
+  });
+</script>
 
 </body>
 </html>
