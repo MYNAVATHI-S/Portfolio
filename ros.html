@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gazebo Simulation - ROS2 Guide</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f1f1f1;
+      padding: 2rem;
+      line-height: 1.6;
+      font-size: 1.1rem;
+      cursor: none;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    h1, h2, h3 {
+      color: #00ffff;
+    }
+    code, pre {
+      background: #1e1e1e;
+      color: #a0e0ff;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+      display: block;
+    }
+    ul {
+      margin: 1em 0;
+      padding-left: 20px;
+    }
+    a {
+      color: #00ddff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .sparkle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff, #0ff, transparent);
+      pointer-events: none;
+      z-index: 9999;
+      animation: sparkleFade 0.6s linear forwards;
+    }
+    @keyframes sparkleFade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2);
+      }
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 20px 0;
+      box-shadow: 0 0 10px #00ffff80;
+    }
+    .container {
+      background: #111;
+      border-radius: 10px;
+      padding: 20px;
+      display: inline-block;
+      box-shadow: 0 0 20px #00ffcc;
+      max-width: 90%;
+      margin: auto;
+    }
+     .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 10px 20px;
+      background: #00eaff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+   
+    }
+    .btn:hover {
+      background: #00bcd4;}
+  </style>
+</head>
+<body>
+     <a href="assignment.html" class="btn">Assignment</a><br><br>
+  <div class="container">
+   
+    <h1>Gazebo Simulation - ROS2 on Raspberry Pi</h1>
+
+    <div class="section">
+      <h2>1. ROS2 Installation on Raspberry Pi</h2>
+      <p>Installed on Ubuntu (16GB SD card) using peripherals and HDMI. Followed:</p>
+      <a href="https://docs.ros.org/en/dashing/Installation/Ubuntu-Install-Debians.html" target="_blank">ROS2 Installation Guide</a>
+      <br><img src="./assets/images/gazebo.png" alt="ROS2 Installation Screenshot">
+    </div>
+
+    <div class="section">
+      <h2>2. Verifying ROS2 Installation</h2>
+      <pre><code>ros2 run demo_nodes_cpp talker
+ros2 run demo_nodes_py listener</code></pre>
+      <p>This confirms the publish–subscribe mechanism.</p><br>
+      <img src="./assets/images/gazebo2.png" alt="ROS2 Talker Listener Test">
+    </div>
+
+    <div class="section">
+      <h2>3. Designing Robot in Fusion 360</h2>
+      <p>Used GitHub URDF Exporter script and the "Scripts and Add-ins" feature.</p>
+      <a href="https://www.youtube.com/watch?v=cQh0gNfb6ro" target="_blank">URDF Export Video</a> |
+      <a href="https://drive.google.com/file/d/1QAdHl1d-B80d9c9YRbWYwRue1f9GWx9K/view?usp=sharing" target="_blank">Robot Design File</a>
+      <br><img src="./assets/images/gazebo3.png" alt="Fusion 360 URDF Export">
+    </div>
+
+    <div class="section">
+      <h2>4. Installing COLCON</h2>
+      <pre><code>sudo apt update
+sudo apt install python3-colcon-common-extensions</code></pre>
+      <a href="https://colcon.readthedocs.io/en/released/user/installation.html" target="_blank">COLCON Docs</a>
+      <br><img src="./assets/images/gazebo4.png" alt="Fusion 360 URDF Export">
+    </div>
+
+    <div class="section">
+      <h2>5. Installing Visual Studio Code</h2>
+      <pre><code>sudo apt update
+sudo dpkg -i &lt;package_name&gt;.deb
+code</code></pre>
+    </div>
+
+    <div class="section">
+      <h2>6. Creating and Sourcing ROS2 Workspace</h2>
+      <pre><code>mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+source ~/.bashrc</code></pre>
+    </div>
+
+    <div class="section">
+      <h2>7. Installing Xacro and Joint State Publisher GUI</h2>
+      <pre><code>sudo apt install ros-humble-xacro
+sudo apt install ros-humble-joint-state-publisher-gui
+colcon build --symlink-install</code></pre>
+    </div>
+
+    <div class="section">
+      <h2>8. Error During colcon Build</h2>
+      <p>Issue: Files structured for ROS1, not ROS2. Attempted to convert with following steps:</p>
+
+      <h3>Step 1: Verify URDF/Xacro</h3>
+      <pre><code>ros2 run xacro xacro your_robot.urdf.xacro -o your_robot.urdf</code></pre>
+
+      <h3>Step 2: Convert Launch Files</h3>
+      <h4>ROS1 (XML)</h4>
+      <pre><code>&lt;launch&gt;
+  &lt;param name="robot_description" command="$(find xacro)/xacro $(find your_package)/urdf/your_robot.urdf.xacro" /&gt;
+  &lt;node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /&gt;
+&lt;/launch&gt;</code></pre>
+
+      <h4>ROS2 (Python)</h4>
+      <pre><code>from launch import LaunchDescription
+from launch_ros.actions import Node
+from ament_index_python.packages import get_package_share_directory
+import os
+
+def generate_launch_description():
+    urdf_file = os.path.join(get_package_share_directory('your_package'), 'urdf', 'your_robot.urdf.xacro')
+    return LaunchDescription([
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='robot_state_publisher',
+            output='screen',
+            parameters=[{'robot_description': open(urdf_file).read()}]
+        ),
+    ])</code></pre>
+
+      <h3>Step 3: Update Dependencies</h3>
+      <h4>In package.xml</h4>
+      <pre><code>&lt;exec_depend&gt;robot_state_publisher&lt;/exec_depend&gt;
+&lt;exec_depend&gt;xacro&lt;/exec_depend&gt;</code></pre>
+
+      <h4>In CMakeLists.txt</h4>
+      <pre><code>find_package(ament_cmake REQUIRED)
+find_package(xacro REQUIRED)
+find_package(robot_state_publisher REQUIRED)</code></pre>
+      <br><img src="./assets/images/gazebo5.png" alt="Fusion 360 URDF Export">
+
+      <h3>Step 4: Build and Launch</h3>
+      <pre><code>colcon build
+source install/setup.bash
+ros2 launch your_package your_launch_file.launch.py</code></pre>
+
+      <p>However, issue still persisted.</p>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("mousemove", (e) => {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = `${e.clientX}px`;
+      sparkle.style.top = `${e.clientY}px`;
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 600);
+    });
+  </script>
+</body>
+</html>

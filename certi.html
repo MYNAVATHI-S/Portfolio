@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Certificate Flipbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      cursor: none; /* hide default cursor */
+    }
+
+    h1 {
+      margin: 30px;
+      font-size: 2.5rem;
+      color: #00fff0;
+    }
+
+    .book-container {
+      position: relative;
+      width: 700px;
+      max-width: 95%;
+      height: 520px;
+      perspective: 2000px;
+      overflow: hidden;
+    }
+
+    .page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #00fff0;
+      box-shadow: 0 0 20px #00fff0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateX(100%);
+      transition: transform 0.6s ease, opacity 0.5s ease;
+    }
+
+    .page.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    .page h2 {
+      margin-top: 0;
+      color: #00fff0;
+    }
+
+    .page img {
+      width: 100%;
+      height: 300px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .controls {
+      margin: 20px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .controls button {
+      padding: 10px 20px;
+      border: none;
+      background: #00fff0;
+      color: #000;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      background: #00c9b7;
+    }
+
+    .btn {
+      padding: 10px 25px;
+      background: transparent;
+      border: 2px solid #0ef;
+      color: white;
+      font-weight: 600;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      margin-bottom: 20px;
+      display: inline-block;
+      perspective: 800px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .btn:hover {
+      transform: scale3d(1.03);
+      background-color: #0ef;
+      color: black;
+      box-shadow: 0 0 25px #0ef;
+    }
+
+    @media (max-width: 768px) {
+      .book-container {
+        height: 100%;
+      }
+
+      .page img {
+        height: auto;
+      }
+    }
+
+    /* Sparkle Effect */
+    .sparkle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0ef;
+      pointer-events: none;
+      animation: sparkleFade 0.8s linear forwards;
+      z-index: 9999;
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2);
+      }
+    }
+p{
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+    /* Custom Cursor */
+    .custom-cursor {
+      position: fixed;
+      width: 18px;
+      height: 18px;
+      background: rgba(0, 255, 240, 0.8);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition: transform 0.05s ease;
+    }
+    span{color: white;}
+  #neon-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.neon-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0.9;
+  pointer-events: none;
+  animation: fadeOut 1s linear forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    transform: scale(1.8) translateY(-20px);
+    opacity: 0;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+ 
+  <div class="custom-cursor" id="customCursor"></div>
+  <a href="index.html" class="btn">Home</a>
+
+  <h1>📜 My <span>Certificates</span></h1>
+
+  <div class="book-container" id="book">
+    <div class="page active">
+      <h2>Certificate 1</h2>
+      <img src="assets/images/PCB certificate.jpg" alt="Certificate 1" />
+      <p>Certificate of Participation - Workshop on PCB Design</p>
+    </div>
+    <div class="page">
+      <h2>Certificate 2</h2>
+      <img src="assets/images/es.png" alt="Certificate 2" />
+      <p>Certificate of Participation - Electronics Course Foundation</p>
+    </div>
+    <div class="page">
+      <h2>Certificate 3</h2>
+      <img src="assets/images/ES.jpg" alt="Certificate 3" />
+      <p>Certificate of Participation - Smart Embedded Systems</p>
+    </div>
+    <div class="page">
+      <h2>Certificate 4</h2>
+      <img src="assets/images/web deveioper certificate.jpg" alt="Certificate 4" />
+      <p>Certificate of Participation - Web Developer Course</p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="prevPage()">⏮️ Previous</button>
+    <button onclick="nextPage()">⏭️ Next</button>
+  </div>
+<body>
+  <div id="neon-particles"></div>
+</body>
+
+  <script>
+    const container = document.getElementById("neon-particles");
+
+document.addEventListener("mousemove", (e) => {
+  for (let i = 0; i < 2; i++) {
+    createSparkle(e.clientX, e.clientY);
+  }
+});
+
+function createSparkle(x, y) {
+  const particle = document.createElement("div");
+  particle.classList.add("neon-particle");
+
+  const size = Math.random() * 4 + 2;
+  particle.style.width = `${size}px`;
+  particle.style.height = `${size}px`;
+
+  const hue = Math.floor(Math.random() * 360);
+  const color = `hsl(${hue}, 100%, 70%)`;
+
+  particle.style.background = color;
+  particle.style.boxShadow = `0 0 8px ${color}, 0 0 12px ${color}`;
+  particle.style.left = `${x + (Math.random() - 0.5) * 10}px`;
+  particle.style.top = `${y + (Math.random() - 0.5) * 10}px`;
+
+  container.appendChild(particle);
+
+  setTimeout(() => {
+    particle.remove();
+  }, 1000);
+}
+
+
+    const pages = document.querySelectorAll('.page');
+    let currentPage = 0;
+
+    function updatePages(direction = 'next') {
+      pages.forEach((page, index) => {
+        page.classList.remove('active');
+        if (index === currentPage) {
+          page.style.transition = 'none';
+          page.style.transform = direction === 'next' ? 'translateX(100%)' : 'translateX(-100%)';
+          page.offsetHeight; // reflow
+          page.classList.add('active');
+          page.style.transition = 'transform 0.6s ease, opacity 0.5s ease';
+          page.style.transform = 'translateX(0)';
+        } else {
+          page.style.transform = direction === 'next' ? 'translateX(-100%)' : 'translateX(100%)';
+        }
+      });
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        updatePages('next');
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        updatePages('prev');
+      }
+    }
+
+    updatePages();
+
+    // Sparkle Cursor
+    document.addEventListener("mousemove", function(e) {
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("sparkle");
+      sparkle.style.left = e.clientX + "px";
+      sparkle.style.top = e.clientY + "px";
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        sparkle.remove();
+      }, 800);
+    });
+
+    // Custom Cursor
+    const customCursor = document.getElementById("customCursor");
+    document.addEventListener("mousemove", (e) => {
+      customCursor.style.left = e.clientX + "px";
+      customCursor.style.top = e.clientY + "px";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FSR406 Sensor Interface Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f0f0f;
+      color: #00ffee;
+      padding: 2rem;
+      margin: 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+
+   h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 5s linear infinite;
+}
+
+    h2 {
+      color: #00ffff;
+      font-family: 'Orbitron', sans-serif;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes shine {
+      0% {
+        background-position: 0% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffff;
+      }
+      to {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffcc;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      border: 2px solid #00ffcc;
+      border-radius: 10px;
+      margin: 1rem 0;
+    }
+    a.code{
+        border: 3px solid #00ffcc;
+      border-radius: 25px;
+      margin: 2rem 0;
+      color: white;
+      padding: 8px;
+    }
+    code{
+        color: white;
+    }
+    .code-block {
+      background: #1e1e1e;
+      color: #c5f3ff;
+      text-align: left;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      overflow-x: auto;
+      font-family: monospace;
+      box-shadow: 0 0 10px #00ffff33;
+    }
+/* Cursor sparkle effect */
+.sparkle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff, #0ff, transparent);
+  pointer-events: none;
+  z-index: 9999;
+  animation: sparkleFade 0.5s linear forwards;
+}
+
+@keyframes sparkleFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Adjust global font size */
+body {
+  font-size: 1.1rem;
+}
+
+    ul, ol {
+      text-align: left;
+      display: inline-block;
+      color: #d5faff;
+      margin: 1rem auto;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 10px 20px;
+      background: #00eaff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-left: -1290px;
+    }
+    .btn:hover {
+      background: #00bcd4;}
+
+    iframe {
+      border: none;
+      width: 100%;
+      height: 400px;
+      border-radius: 10px;
+      margin-top: 1rem;
+      box-shadow: 0 0 12px #00ffee66;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+    <a href="assignment.html" class="btn">Assignment</a>
+  <div class="container">
+    <h1>FSR406 Square Force Sensor Pressure Sensor 44mm</h1>
+
+    <h2>1. Connecting FSR to Mixed Signal Oscilloscope (MSO)</h2>
+    <p>Visualize pressure-to-voltage changes using an MSO.</p>
+   
+    <ol>
+      <li>Connect one FSR terminal to 5V</li>
+      <li>Connect other terminal to CH1 probe & 10kΩ resistor</li>
+      <li>Other side of resistor to GND</li>
+      <li>Connect oscilloscope ground clip to GND</li>
+    </ol>
+ <img src="./assets/images/fsr1.jpg" alt="FSR to MSO setup">
+    <h3>Oscilloscope Settings</h3>
+    <ul>
+      <li>Voltage Scale: 500mV/div</li>
+      <li>Time Base: 1ms/div</li>
+      <li>Trigger: Normal or Auto</li>
+      <li>Coupling: DC/AC depending on analysis</li>
+    </ul>
+
+    <h3>Noise Reduction</h3>
+    <ul>
+      <li>Use RC filter: 10kΩ + 0.1µF</li>
+      <li>Enable averaging mode</li>
+      <li>Use shielded wires</li>
+    </ul>
+
+    <h2>2. Tinkercad Voltage Divider with Arduino</h2>
+    
+    <ol>
+      <li>FSR + 10kΩ resistor form a voltage divider</li>
+      <li>Middle node connects to A0 on Arduino</li>
+      <li>Monitor values via Serial Monitor or Oscilloscope</li>
+    </ol><br>
+<img src="./assets/images/tinker.png" alt="Tinkercad FSR setup">
+    <h2>3. ESP8266 + FSR + Arduino IDE</h2>
+    <ol>
+      <li>Connect one FSR pin to 3.3V, other to A0</li>
+      <li>Connect 10kΩ resistor between A0 and GND</li>
+      <li>Upload the following code using Arduino IDE</li>
+    </ol><br><br>
+
+    <img src="./assets/images/fsr.png" alt="FSR to MSO setup">
+    <div class="code-block"><pre>
+<code>
+    <h2> FSR code</h2>
+    #include <ESP8266WiFi.h>
+#include <WiFiClientSecure.h>
+
+const char* ssid = "InnovateTN_Forcers";
+const char* password = "Forged@Forge";
+const char* googleScriptURL = "https://script.google.com/macros/s/AKfycbzsJkNsL2yz6PcqqgoMl2hw8MbxUzzUrKuqV4K4eOKhlRXPAZ8Dhmu5eq3n9a3yMY3l0g/exec"; // Use Web App URL, NOT Google Sheets URL!
+
+#define SENSOR_PIN A0  
+
+WiFiClientSecure client;
+
+void setup() {
+    Serial.begin(115200);
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ssid, password);
+
+    Serial.print("Connecting to WiFi...");
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+    Serial.println("\nWiFi Connected!");
+
+    // Disable SSL certificate verification for easier connection
+    client.setInsecure();
+}
+
+void loop() {
+    int sensorValue = analogRead(SENSOR_PIN);
+    Serial.print("Sensor Value: ");
+    Serial.println(sensorValue);
+
+    sendToGoogleSheets(sensorValue);
+
+    delay(5000);  // Send data every 5 seconds
+}
+
+void sendToGoogleSheets(int value) {
+    if (client.connect("script.google.com", 443)) {
+        String url = String(googleScriptURL) + "?value=" + String(value);
+        
+        client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+                     "Host: script.google.com\r\n" +
+                     "Connection: close\r\n\r\n");
+        Serial.println("Data Sent to Google Sheets!");
+    } else {
+        Serial.println("Connection Failed!");
+    }
+}
+
+</code></pre>
+    </div>
+
+    <h2>4. Send FSR Data to Google Sheets</h2>
+    
+    <ol>
+      <li>Create Google Sheet → Extensions → Apps Script</li>
+      <li>Paste script and deploy as Web App (anyone access)</li>
+      <li>Copy URL</li>
+      <li>Use the ESP8266 code below to send values</li>
+    </ol><br><br>
+    <a  href="https://docs.google.com/spreadsheets/d/159J8S-j0A5nNr0FhLGicbe5Kam_8nhA8xuWfwgYPuzk/edit?usp=sharing" class="code">Sensor Google Sheet</a>
+    <div class="code-block"><pre>
+<code>
+    <h2> Final code</h2>
+    #include <ESP8266WiFi.h>
+#include <WiFiClientSecure.h>
+
+const char* ssid = "InnovateTN_Forcers";
+const char* password = "Forged@Forge";
+const char* googleScriptURL = "https://script.google.com/macros/s/AKfycbzEg3sR_rz36F4Z5BFbFrPn4A80QM0Gh89lWzWVrqLF453zQoQLue4v1E0HNf1IZpzC/exec"; // Web App URL
+
+#define SENSOR_PIN A0
+
+WiFiClientSecure client;
+
+void setup() {
+    Serial.begin(115200);
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ssid, password);
+
+    Serial.print("Connecting to WiFi...");
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+    Serial.println("\nWiFi Connected!");
+
+    // Disable SSL certificate verification for easier connection
+    client.setInsecure();
+}
+
+void loop() {
+    int sensorValue = analogRead(SENSOR_PIN);
+    float voltage = (sensorValue / 1023.0) * 3.3;  // Calculate voltage
+
+    Serial.print("Sensor Value: ");
+    Serial.println(sensorValue);
+    Serial.print("Voltage: ");
+    Serial.println(voltage, 3);  // Print voltage with 3 decimal places
+
+    sendToGoogleSheets(sensorValue, voltage);
+
+    delay(1000);  // Send data every 1 second
+}
+
+void sendToGoogleSheets(int value, float voltage) {
+    if (client.connect("script.google.com", 443)) {
+        String url = String(googleScriptURL) + "?value=" + String(value) + "&voltage=" + String(voltage, 3);  // Adding voltage to URL
+
+        // Send HTTP POST request
+        client.print(String("POST ") + url + " HTTP/1.1\r\n" +
+                     "Host: script.google.com\r\n" +
+                     "Connection: close\r\n\r\n");
+
+        // Wait for the server's response
+        String response = "";
+        while (client.available()) {
+            response = client.readString();
+        }
+
+        // Print server response for debugging
+        Serial.println("Response from server:");
+        Serial.println(response);
+        Serial.println("Data Sent to Google Sheets!");
+    } else {
+        Serial.println("Connection Failed!");
+    }
+}
+
+</code></pre>
+    </div>
+
+    <h2>Simulation Video</h2>
+    <iframe src="./assets/video/VID-20250328-WA0004.mp4" allowfullscreen></iframe><br><br>
+     <h2> Google Sheet Video</h2>
+ <iframe src="./assets/video/sensor 2.mp4" allowfullscreen></iframe>
+
+
+  </div>
+  <script>
+  document.addEventListener("mousemove", (e) => {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.style.left = `${e.clientX}px`;
+    sparkle.style.top = `${e.clientY}px`;
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 500);
+  });
+</script>
+
+</body>
+</html>

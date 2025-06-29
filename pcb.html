@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AS5600 PCB Design Viewer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f0f0f, #1c1c1c);
+      color: #00ffcc;
+      text-align: center;
+      padding: 2rem;
+      margin: 0;
+    }
+.sparkle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff, #0ff, transparent);
+  pointer-events: none;
+  z-index: 10000;
+  animation: sparkleFade 0.3s linear forwards;
+}
+
+@keyframes sparkleFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+    .container {
+      background: #111;
+      border-radius: 10px;
+      padding: 20px;
+      display: inline-block;
+      box-shadow: 0 0 20px #00ffcc;
+      max-width: 90%;
+    }
+
+    canvas {
+      border: 1px solid #00ffcc;
+      margin-top: 1rem;
+      background-color: #1a1a1a;
+    }
+
+    img {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 1rem;
+      border: 2px solid #00ffcc;
+      border-radius: 8px;
+    }
+
+    h1, h2 {
+      color: #00ffff;
+    }
+
+    ul {
+      text-align: left;
+      display: inline-block;
+      color: #fff;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .download-button {
+      display: inline-block;
+      background: #00ffcc;
+      color: #111;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .download-button:hover {
+      background: #00dddd;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 10px 20px;
+      background: #00eaff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-left: -1290px;
+    }
+    .btn:hover {
+      background: #00bcd4;}
+  </style>
+</head>
+<body>
+    <a href="assignment.html" class="btn">Assignment</a><br>
+    <br>
+  <div class="container">
+    <h1>AS5600 Sensor Module</h1>
+    <p>This is an interactive explanation and visual representation of an AS5600-based I2C breakout PCB designed in KiCad.</p>
+
+    <h2>Step 1: Schematic</h2>
+    <img src="./assets/images/schematic.png" alt="KiCad Schematic Editor">
+    <p>Create a new KiCad project and build the schematic using the AS5600, resistors for I2C pull-ups, capacitor for decoupling, and pin headers.</p>
+
+    <h2>Step 2: PCB Layout</h2>
+    <img src="./assets/images/pcb.png" alt="KiCad PCB Editor">
+    <p>Switch to PCB editor, arrange components, and route the tracks. Make the layout compact and suitable for a breakout board.</p>
+
+    <h2>Step 3: Visualize the Design</h2>
+    <img src="./assets/images/3d.png" alt="KiCad PCB Editor">
+    <p>This canvas shows a mock visualization of the AS5600 PCB with its components.</p>
+
+    <h2>Step 4: Export Gerber Files</h2>
+    <p>Use KiCad's plot option to generate Gerber and drill files. These are used for PCB fabrication.</p>
+
+    <h2>Connections</h2>
+    <ul>
+      <li><strong>VCC</strong> - Power supply input (3.3V or 5V)</li>
+      <li><strong>GND</strong> - Ground reference for the circuit</li>
+      <li><strong>SDA</strong> - I2C Serial Data Line</li>
+      <li><strong>SCL</strong> - I2C Clock Line</li>
+    </ul>
+
+    <h2>Pin Function Explanation</h2>
+    <p>The AS5600 sensor communicates over I2C. <br> The <strong>SDA</strong> line is used for sending/receiving data while the <strong>SCL</strong> line provides the clock signal. <br> Pull-up resistors are necessary on both lines to ensure proper communication.</p>
+
+    <h2>Applications of AS5600</h2>
+    <ul>
+      <li>Rotary encoders for motor position sensing</li>
+      <li>Angle sensing in robotic joints</li>
+      <li>Knob or dial position tracking in control panels</li>
+      <li>Contactless potentiometer replacement</li>
+    </ul>
+
+    <h2>Resources</h2>
+    <p>You can download the design files below:</p>
+    <a href="https://drive.google.com/drive/folders/1Id41ba5bYTpwIzUo3zGwm-epBMT0dZKS?usp=drive_link" class="download-button" download>Download KiCad Project</a>
+
+
+  </div>
+
+  <script>
+   
+  const sparkles = [];
+
+  document.addEventListener("mousemove", (e) => {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.style.left = e.clientX + "px";
+    sparkle.style.top = e.clientY + "px";
+    document.body.appendChild(sparkle);
+    sparkles.push(sparkle);
+
+    setTimeout(() => {
+      sparkle.remove();
+      sparkles.shift();
+    }, 300);
+  });
+
+
+    const canvas = document.getElementById("pcbCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function drawPCB() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // PCB Base
+      ctx.fillStyle = "#006600";
+      ctx.fillRect(50, 50, 300, 300);
+
+      // IC
+      ctx.fillStyle = "#222";
+      ctx.fillRect(160, 160, 80, 80);
+      ctx.fillStyle = "#0f0";
+      ctx.font = "14px monospace";
+      ctx.fillText("AS5600", 170, 205);
+
+      // Pins
+      const pins = [
+        { x: 60, y: 80, label: "VCC" },
+        { x: 60, y: 120, label: "GND" },
+        { x: 60, y: 160, label: "SDA" },
+        { x: 60, y: 200, label: "SCL" },
+      ];
+
+      pins.forEach((pin) => {
+        ctx.beginPath();
+        ctx.fillStyle = "#ff0";
+        ctx.arc(pin.x, pin.y, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#fff";
+        ctx.fillText(pin.label, pin.x + 15, pin.y + 5);
+      });
+    }
+
+    drawPCB();
+  </script>
+</body>
+</html>

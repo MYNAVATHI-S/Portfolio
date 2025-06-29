@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Share App UI/UX Process</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #0f0f0f, #1c1c1c);
+      color: #00ffcc;
+      padding: 2rem;
+      cursor: none;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffff;
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .step {
+      background: #111;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffcc33;
+      margin: 1rem auto;
+      max-width: 800px;
+      padding: 20px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .step:hover {
+      box-shadow: 0 0 25px #00ffee77;
+    }
+
+    .step h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #00ffee;
+    }
+
+    .step-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      font-size: 1rem;
+      padding-top: 0.5rem;
+      color: #d5faff;
+    }
+
+    .step.active .step-content {
+      max-height: 300px;
+    }
+
+    .video-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 12px #00ffee77;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 10px 20px;
+      background: #00eaff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #00bcd4;
+    }
+
+    /* Sparkle Trail Cursor */
+    .sparkle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff, #0ff, transparent);
+      pointer-events: none;
+      z-index: 9999;
+      animation: sparkleFade 0.6s linear forwards;
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2);
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="assignment.html" class="btn">Assignment</a><br><br>
+  <h1>Food Share App UI/UX - Step by Step</h1>
+
+  <div class="step" onclick="toggleStep(this)">
+    <h2>Step 1: UI Design in Figma</h2>
+    <div class="step-content">
+      <p>Created the initial layout in Figma including home screen, navigation bar, food cards, and donate/request buttons. Focused on color harmony and mobile-first UI.</p>
+    </div>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <h2>Step 2: Export Design Assets</h2>
+    <div class="step-content">
+      <p>Exported icons, buttons, and layout dimensions from Figma. Used consistent spacing and typography guidelines.</p>
+    </div>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <h2>Step 3: HTML Structure</h2>
+    <div class="step-content">
+      <p>Created the layout using semantic HTML5 tags. Included header, cards, and a navigation bar for mobile responsiveness.</p>
+    </div>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <h2>Step 4: CSS Styling</h2>
+    <div class="step-content">
+      <p>Styled the layout using Flexbox and media queries. Focused on colors matching Figma and modern neumorphic box shadows.</p>
+    </div>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <h2>Step 5: JavaScript Interactions</h2>
+    <div class="step-content">
+      <p>Added dynamic effects like request button functionality, navigation highlight, and expandable steps like this page.</p>
+    </div>
+  </div>
+
+  <div class="step" onclick="toggleStep(this)">
+    <h2>Step 6: Testing & Iteration</h2>
+    <div class="step-content">
+      <p>Tested responsiveness on different screen sizes and refined colors, spacing, and animations based on user feedback.</p>
+    </div>
+  </div>
+
+  <div class="video-container">
+    <h2 style="color:#00ffee;">Figma UI Walkthrough Video</h2>
+    <video controls>
+      <source src="./assets/video/UI.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <script>
+    function toggleStep(el) {
+      el.classList.toggle('active');
+    }
+
+    // Sparkle Cursor Effect
+    document.addEventListener("mousemove", (e) => {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = `${e.clientX}px`;
+      sparkle.style.top = `${e.clientY}px`;
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 600);
+    });
+  </script>
+</body>
+</html>

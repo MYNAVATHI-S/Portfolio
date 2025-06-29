@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scratch Projects & MIT App Inventor App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="./assets/css/Site.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <style>
+    :root {
+      --bg-color: #1f242d;
+      --second-bg-color: #323946;
+      --text-color: #fff;
+      --main-color: #0ef;
+      --light-glow: rgba(0, 239, 255, 0.8);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-size: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      text-align: center;
+      font-weight: 700;
+      color: var(--main-color);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInHeader 1s forwards;
+    }
+
+    @keyframes fadeInHeader {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    section {
+      width: 90%;
+      max-width: 900px;
+      margin-bottom: 3rem;
+    }
+
+    .project {
+      margin-bottom: 2rem;
+      background-color: var(--second-bg-color);
+      padding: 5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      animation: slideIn 1s forwards;
+      transition: transform 0.3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px var(--light-glow);
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateX(-50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .project img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 1rem;
+      opacity: 0;
+      animation: fadeInImage 1.5s forwards;
+    }
+
+    @keyframes fadeInImage {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      color: var(--main-color);
+    }
+
+    p {
+      font-weight: 300;
+      font-size: 1.6rem;
+    }
+
+    .app-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: var(--second-bg-color);
+      padding: 3rem;
+      border-radius: 10px;
+      width: 40%;
+      opacity: 0;
+      animation: fadeInSection 1s forwards;
+    }
+
+    .app-section:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px var(--light-glow);
+    }
+
+    @keyframes fadeInSection {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .app-section img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInImage 1s forwards;
+    }
+
+    .app-section button {
+      background-color: var(--main-color);
+      padding: 1rem 2rem;
+      font-size: 1.6rem;
+      color: var(--text-color);
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 2rem;
+      opacity: 0;
+      animation: fadeInButton 1s forwards;
+      transition: background-color 0.3s ease;
+    }
+
+    @keyframes fadeInButton {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .app-section button:hover {
+      background-color: var(--light-glow);
+    }
+
+    .qrcode {
+      margin-top: 3rem;
+    }
+
+    .btn {
+      margin-left: -1300px;
+    }
+
+    /* Sparkle trail */
+    .sparkle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      box-shadow: 0 0 12px var(--main-color), 0 0 25px var(--main-color);
+      animation: sparkleAnim 1.2s forwards;
+      opacity: 1;
+      filter: drop-shadow(0 0 4px currentColor);
+      will-change: transform, opacity;
+    }
+
+    @keyframes sparkleAnim {
+      0% {
+        opacity: 1;
+        transform: scale(1) translate(0, 0);
+        filter: drop-shadow(0 0 6px currentColor);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3) translate(var(--x-move, 0), var(--y-move, -10px));
+        filter: drop-shadow(0 0 0 transparent);
+      }
+    }
+
+    /* Rainbow Pointer */
+    .rainbow-pointer {
+      position: fixed;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: white;
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 0 0 10px white;
+      mix-blend-mode: difference;
+      transition: transform 0.05s ease;
+      animation: rainbowHue 2s linear infinite;
+      will-change: transform;
+    }
+
+    @keyframes rainbowHue {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="rainbow-pointer" id="rainbowPointer"></div>
+
+  <header>
+    <h1>Scratch Projects & MIT App Inventor App</h1>
+  </header>
+  <a href="assignment.html" class="btn">Assignment</a>
+
+  <section class="scratch-projects">
+    <div class="project">
+      <h2>Maze Game</h2>
+      <p>The Maze Game challenges players to navigate through a maze while avoiding obstacles...</p>
+      <br><img src="./assets/images/Picture5.png" alt="Maze Game Screenshot">
+    </div>
+
+    <div class="project">
+      <h2>Apple Catching Game</h2>
+      <p>The Apple Catching Game is a fun challenge where a basket moves left and right...</p>
+      <br><img src="./assets/images/Picture4.png" alt="Apple Catching Game Screenshot">
+    </div>
+
+    <div class="project">
+      <h2>Fun Oreo Story</h2>
+      <p>The Fun Oreo Story is an interactive storytelling project...</p>
+      <img src="./assets/images/Picture3.png" alt="Fun Oreo Story Screenshot">
+    </div>
+  </section>
+
+  <section class="app-section">
+    <h2>Attendance App Using MIT App Inventor</h2>
+    <p>The MIT App Inventor Attendance App features a face camera...</p>
+    <div class="qrcode">
+      <img src="./assets/images/Picture1.png" alt="QR Code 1"><br><br>
+      <img src="./assets/images/Picture2.png" alt="QR Code 2"><br>
+      <button onclick="window.location.href='https://drive.google.com/file/d/1qaFZvCWLLFXZyAbkJXo-iRDd3PfQrgvL/view'">Click to Download App</button>
+    </div>
+  </section>
+
+  <script>
+    const pointer = document.getElementById("rainbowPointer");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let pointerX = mouseX;
+    let pointerY = mouseY;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      createSparkle(e.clientX, e.clientY);
+    });
+
+    function createSparkle(x, y) {
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("sparkle");
+
+      // Random subtle movement directions for sparkle (CSS variables)
+      const offsetX = (Math.random() - 0.5) * 30 + "px";
+      const offsetY = (Math.random() - 1) * 30 + "px"; // mostly upward
+
+      sparkle.style.left = x + "px";
+      sparkle.style.top = y + "px";
+
+      // Pass random movement to CSS variable for animation
+      sparkle.style.setProperty('--x-move', offsetX);
+      sparkle.style.setProperty('--y-move', offsetY);
+
+      // Random sparkle color with pastel rainbow effect
+      const hue = Math.floor(Math.random() * 360);
+      sparkle.style.backgroundColor = `hsl(${hue}, 80%, 75%)`;
+
+      document.body.appendChild(sparkle);
+
+      // Remove sparkle after animation ends
+      sparkle.addEventListener('animationend', () => {
+        sparkle.remove();
+      });
+    }
+
+    function animate() {
+      // Smooth easing (lerp) pointer position towards mouse
+      pointerX += (mouseX - pointerX) * 0.15;
+      pointerY += (mouseY - pointerY) * 0.15;
+
+      pointer.style.transform = `translate(${pointerX - 7}px, ${pointerY - 7}px)`;
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>

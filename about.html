@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #1f1f1f, #121212);
+      color: #fff;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    header {
+      padding: 50px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .btn {
+      padding: 10px 25px;
+      background: transparent;
+      border: 2px solid #0ef;
+      color: white;
+      font-weight: 600;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      margin-bottom: 20px;
+      display: inline-block;
+      perspective: 800px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .btn:hover {
+      background: #0ef;
+      color: black;
+      box-shadow: 0 0 20px #0ef;
+      transform: rotateX(8deg) rotateY(12deg) scale(1.05);
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    .about {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding-top: 60px;
+    }
+
+    .about-img img {
+      width: 280px;
+      border-radius: 20px;
+      transition: transform 0.4s ease;
+      box-shadow: 0 0 15px rgba(0,255,255,0.3);
+      margin-top: 180px;
+    }
+
+    .about-img img:hover {
+      transform: scale(1.05) rotateY(10deg);
+    }
+
+    .about-content {
+      max-width: 600px;
+    }
+
+    .heading {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #0ef;
+      text-shadow: 0 0 10px #0ef;
+    }
+
+    .about-content h3 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    .about-content p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #e0e0e0;
+    }
+
+    #more { display: none; }
+
+    #myBtn {
+      background-color: transparent;
+      border: 2px solid #0ef;
+      color: #0ef;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      padding: 10px 25px;
+      border-radius: 30px;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+    }
+
+    #myBtn:hover {
+      background: #0ef;
+      color: black;
+      box-shadow: 0 0 20px #0ef;
+      transform: rotateX(8deg) rotateY(12deg) scale(1.05);
+    }
+
+    #myBtn:active {
+      transform: scale(0.95);
+    }
+
+    .cursor {
+      position: fixed;
+      width: 22px;
+      height: 22px;
+      background: radial-gradient(circle, #0ef, #08f);
+      border: 2px solid white;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      animation: pulse 1.4s infinite ease-in-out;
+      mix-blend-mode: difference;
+      transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+    }
+
+    .cursor.hovered {
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle, #0ef, #005fbb);
+      border-color: #0ef;
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.4); }
+    }
+
+    .trail, .sparkle, .ripple {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 999;
+    }
+
+    .trail {
+      width: 10px;
+      height: 10px;
+      background: rgba(0, 255, 255, 0.5);
+      animation: fadeOut 1.2s forwards;
+    }
+#neonParticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Behind everything */
+  background: transparent;
+}
+
+    .sparkle {
+      width: 6px;
+      height: 6px;
+      background: white;
+      animation: sparkleAnim 0.7s ease-out;
+    }
+
+    @keyframes sparkleAnim {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.2); }
+    }
+
+    .ripple {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #0ef;
+      transform: translate(-50%, -50%);
+      animation: rippleEffect 0.6s linear;
+    }
+
+    @keyframes rippleEffect {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .about {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-content {
+        padding: 20px;
+      }
+
+      .about-img img {
+        width: 220px;
+      }
+
+      .btn {
+        position: static;
+        margin: 20px auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+
+  <header>
+    <section class="about" id="about">
+      <a href="index.html" class="btn">Home</a>
+      <div class="about-img">
+        <img src="./assets/images/myna.jpg" alt="Portrait of Mynavathi S - Software Developer">
+      </div>
+
+      <div class="about-content">
+        <h2 class="heading">About <span>Me</span></h2>
+        <h3><span class="typed-text"></span></h3>
+        <p>
+          Hi, I'm Mynavathi S, a passionate and aspiring software developer with a strong foundation in web technologies and prototyping.
+          <span id="dots">...</span><span id="more">
+            My journey in software development has been driven by a passion for creating innovative solutions and enhancing user experiences through technology.
+            I'm particularly fascinated by the practical applications of technology, such as laser cutting methods, and continuously seek to explore new advancements and techniques.
+            My commitment to staying updated with the latest trends in the tech industry ensures that I bring fresh and relevant insights to every project I undertake.
+            Throughout my career, I've had the opportunity to work on several successful projects, earning recognition for my dedication and expertise.
+            My ability to break down complex concepts and present them in an engaging manner has been one of my key strengths.
+          </span>
+        </p>
+        <button onclick="myFunction()" id="myBtn">Read more</button>
+      </div>
+    </section>
+  </header>
+
+  <canvas id="neonParticles"></canvas>
+  <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+
+    const canvas = document.getElementById('neonParticles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+function initParticles() {
+  particles = [];
+  for (let i = 0; i < 100; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      radius: Math.random() * 2 + 1,
+      color: `hsl(${Math.random() * 360}, 100%, 70%)`
+    });
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = p.color;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animateParticles);
+}
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  initParticles();
+});
+
+initParticles();
+animateParticles();
+
+    function myFunction() {
+      const dots = document.getElementById("dots");
+      const moreText = document.getElementById("more");
+      const btnText = document.getElementById("myBtn");
+
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Read more";
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Read less";
+        moreText.style.display = "inline";
+      }
+    }
+
+    new Typed(".typed-text", {
+      strings: ["Software Developer", "Hardware Prototyper", "Creative Technologist","Embedded Enthusiast"],
+      typeSpeed: 70,
+      backSpeed: 40,
+      loop: true
+    });
+
+    ScrollReveal({
+      reset: true,
+      distance: '80px',
+      duration: 1500,
+      delay: 200
+    });
+
+    ScrollReveal().reveal('.about-img img', { origin: 'left' });
+    ScrollReveal().reveal('.about-content', { origin: 'right' });
+    ScrollReveal().reveal('.heading, .typed-text', { origin: 'top' });
+
+    const cursor = document.querySelector('.cursor');
+    let x = 0, y = 0;
+
+    document.addEventListener("mousemove", e => {
+      x = e.clientX;
+      y = e.clientY;
+      cursor.style.left = x + 'px';
+      cursor.style.top = y + 'px';
+
+      const trail = document.createElement('div');
+      trail.className = 'trail';
+      trail.style.left = x + 'px';
+      trail.style.top = y + 'px';
+      document.body.appendChild(trail);
+      setTimeout(() => trail.remove(), 1200);
+
+      if (Math.random() < 0.4) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = (x + (Math.random() * 30 - 15)) + 'px';
+        sparkle.style.top = (y + (Math.random() * 30 - 15)) + 'px';
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 700);
+      }
+    });
+
+    document.addEventListener('click', e => {
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      ripple.style.left = e.clientX + 'px';
+      ripple.style.top = e.clientY + 'px';
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+
+    const buttons = document.querySelectorAll('.btn, #myBtn');
+    buttons.forEach(btn => {
+      btn.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+      btn.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+    });
+
+    const clickSound = new Audio('https://cdn.freesound.org/previews/522/522658_931655-lq.mp3');
+    const myBtn = document.getElementById('myBtn');
+    myBtn.addEventListener('click', () => {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    });
+  </script>
+</body>
+</html>

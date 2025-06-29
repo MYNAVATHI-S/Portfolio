@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Robotic Arm Assembly</title>
+  <style>
+    :root {
+      --bg-color: #0d0d0d;
+      --second-bg-color: #1c1c1c;
+      --text-color: #ffffff;
+      --main-color: #0ef;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-size: 1.2rem;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0ef, #a020f0, #ff0080);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      animation: pulseGlow 2s infinite ease-in-out;
+      border-radius: 12px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      text-shadow: 0 0 15px var(--main-color);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #0ef;
+    }
+
+    section {
+      background-color: var(--second-bg-color);
+      padding: 2.5rem;
+      margin: 3rem auto;
+      border-radius: 16px;
+      width: 80%;
+      box-shadow: 0 0 15px rgba(0, 239, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+    }
+
+    section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 25px rgba(0, 239, 255, 0.6);
+    }
+
+    ul, ol {
+      margin-top: 0.5rem;
+      padding-left: 1.5rem;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #0ef, #ff00cc);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 12px #0ef;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px #0ef;
+    }
+
+    #videoContainer {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    #videoContainer.show {
+      display: block;
+      opacity: 1;
+    }
+
+    video {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 239, 255, 0.4);
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 1rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: #0ef;
+      color: #000;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: none;
+      text-align: center;
+      box-shadow: 0 0 20px #0ef;
+    }
+
+    .btn:hover {
+      background: #fff;
+      color: #0ef;
+      box-shadow: 0 0 25px #0ef;
+      transform: scale(1.05);
+    }
+
+    /* Cursor styles */
+    .cursor-dot, .cursor-sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: white;
+      box-shadow: 0 0 6px #0ef, 0 0 12px #0ef;
+      animation: pulseGlow 1.5s infinite ease-in-out;
+    }
+
+    .cursor-sparkle {
+      width: 4px;
+      height: 4px;
+      opacity: 0.7;
+      animation: sparkleFade 1s forwards;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 5px #0ef; }
+      50% { box-shadow: 0 0 15px #0ef; }
+      100% { box-shadow: 0 0 5px #0ef; }
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        transform: scale(1.5);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0.3);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <a href="assignment.html" class="btn"> Assignment</a>
+
+  <header>
+    <h1>Robotic Arm Assembly Featuring Six Degrees of Freedom</h1>
+  </header>
+
+  <section>
+    <h2>1. Component Overview</h2>
+    <ul>
+      <li><strong>Base Platform</strong> – Provides rotational support</li>
+      <li><strong>Shoulder</strong> – Enables up/down motion</li>
+      <li><strong>Elbow</strong> – Adds extension flexibility</li>
+      <li><strong>Wrist</strong> – Controls tilt and rotation</li>
+      <li><strong>Gripper</strong> – Handles objects</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. Joint Architecture (6+ DOF)</h2>
+    <ol>
+      <li>Base Yaw</li>
+      <li>Shoulder Pitch</li>
+      <li>Elbow Pitch</li>
+      <li>Wrist Pitch</li>
+      <li>Wrist Roll</li>
+      <li>Gripper Actuation</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>3. Assembly Constraints</h2>
+    <ul>
+      <li>Revolute Joints for moving parts</li>
+      <li>Rigid Joints for fixed structure</li>
+      <li>As-Built Constraints for realism</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Animation Steps</h2>
+    <p>Each joint is triggered step-by-step to mimic real-world automation.</p>
+  </section>
+
+  <section>
+    <h2>5. Final Output (Video)</h2>
+    <p>Exported in 1080p, 30 FPS, high-quality MP4 format.</p><br><br>
+    <button id="playVideo">▶️ Play Animation</button>
+    <div id="videoContainer">
+      <video id="robotArmVideo" controls>
+        <source src="./assets/video/1 (1).mp4" type="video/mp4">
+        Your browser doesn't support HTML5 video.
+      </video>
+    </div>
+  </section>
+
+  <script>
+    // Video player
+    document.getElementById("playVideo").addEventListener("click", function () {
+      const videoContainer = document.getElementById("videoContainer");
+      videoContainer.classList.add("show");
+      const video = document.getElementById("robotArmVideo");
+      video.play();
+    });
+
+    // Rainbow Sparkle Cursor
+    const cursorDot = document.getElementById("cursorDot");
+
+    document.addEventListener("mousemove", (e) => {
+      const { clientX: x, clientY: y } = e;
+      cursorDot.style.left = `${x}px`;
+      cursorDot.style.top = `${y}px`;
+
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("cursor-sparkle");
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+
+      const hue = Math.floor(Math.random() * 360);
+      sparkle.style.backgroundColor = `hsl(${hue}, 100%, 70%)`;
+
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1000);
+    });
+  </script>
+
+</body>
+</html>

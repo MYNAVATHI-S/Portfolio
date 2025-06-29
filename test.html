@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mynavathi Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #101820;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: #101820;
+    }
+    header h1 {
+      color: #00ffff;
+      font-size: 28px;
+    }
+    nav a {
+      color: #00ffff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #ff6f61;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      padding: 0 10%;
+      gap: 80px;
+    }
+    .image-container {
+      position: relative;
+      animation: float 3s ease-in-out infinite;
+    }
+    .image-container img {
+      width: 300px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #00ffff;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    .content {
+      max-width: 600px;
+    }
+    .content h1 {
+      font-size: 48px;
+      margin: 0;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .content h2 {
+      font-size: 32px;
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+    }
+    .content p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+    .social-icons {
+      margin: 20px 0;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      font-size: 24px;
+      color: #00ffff;
+      transition: transform 0.3s, color 0.3s;
+    }
+    .social-icons a:hover {
+      transform: scale(1.2);
+      color: #ff6f61;
+    }
+    .btn {
+      padding: 10px 25px;
+      border: 2px solid #00ffff;
+      background: transparent;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    .btn:hover {
+      transform: scale(1.1) rotate(-2deg);
+      background: #00ffff;
+      color: #101820;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #00ffff; }
+      to { box-shadow: 0 0 25px #00ffff, 0 0 35px #00ffff; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mynavathi</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Project</a>
+      <a href="#">Skills</a>
+      <a href="#">Education</a>
+      <a href="#">ProtoSem 3.3</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="container">
+    <div class="image-container">
+      <img src="./assets/images/myna (2).jpg" alt="Mynavathi">
+    </div>
+    <div class="content">
+      <h1>Hello I'm</h1>
+      <h2>Mynavathi</h2>
+      <h2>and I am a <span class="auto-type">Software Developer</span></h2>
+      <p>I'm excited to introduce myself and take my first step into the professional world. I'm pursuing Bachelor of Electronics and Communication Engineering in 3rd year at GCE, Salem. I have always been fascinated by the field of engineering and I am eager to contribute my skills and knowledge to make a positive impact.</p>
+
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-medium"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+
+      <button class="btn">Hire me</button>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Education</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1f242d, #111318);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      text-align: center;
+      animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+      0% { text-shadow: 0 0 10px #0ef; }
+      50% { text-shadow: 0 0 20px #0ef, 0 0 30px #0ef; }
+      100% { text-shadow: 0 0 10px #0ef; }
+    }
+
+    .btn {
+         padding: 10px 25px;
+      background: transparent;
+      border: 2px solid #0ef;
+      color: white;
+      font-weight: 600;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      margin-bottom: 20px;
+      display: inline-block;
+      perspective: 800px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+
+    }
+
+    .btn:hover {
+      background-color: #0ef;
+      color: #000;
+      box-shadow: 0 0 20px #0ef;
+    }
+
+    .center-wrapper {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 40px 20px;
+    }
+
+    .education-card {
+      flex: 0 0 300px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: bounceSlide 1.2s ease forwards;
+      opacity: 0;
+      text-align: center;
+    }
+  .slideshow-container {
+      display: flex;
+      gap: 30px;
+      padding: 40px 20px;
+      animation: autoSlide 20s linear infinite;
+    }
+
+    @keyframes autoSlide {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .education-card {
+      flex: 0 0 300px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: bounceSlide 1.2s ease forwards;
+      opacity: 0;
+      width: 100%;
+    }
+
+
+
+
+    @keyframes bounceSlide {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      60% {
+        transform: translateY(-15px);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .education-card:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 25px #0ef;
+    }
+
+    .education-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .education-card p {
+      font-size: 1rem;
+    }
+
+    .education-card strong {
+      font-size: 1.2rem;
+      color: #0ef;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* Custom Cursor and Sparkle Trail */
+    .cursor {
+      position: fixed;
+      width: 22px;
+      height: 22px;
+      background: radial-gradient(circle, #0ef, #08f);
+      border: 2px solid white;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+      animation: pulse 1.2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.4); }
+    }
+
+    .sparkle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+      pointer-events: none;
+      animation: sparkleAnim 0.6s ease-out;
+    }
+
+    @keyframes sparkleAnim {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--dx), var(--dy)) scale(0.2);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .education-card {
+        flex: 0 0 80%;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .btn {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="btn">Home</a>
+  <h1>My Education</h1>
+
+  <div class="center-wrapper">
+    <div class="slideshow-container">
+    <div class="education-card">
+      <img src="./assets/images/edu.png" alt="Diploma Image">
+      <p>
+        <strong>Diploma (EEE)</strong>
+        CSI Polytechnic College, Salem
+      </p>
+    </div>
+
+    <div class="education-card">
+      <img src="./assets/images/edu 1.jpg" alt="B.E Image">
+      <p>
+        <strong>Pursuing B.E (ECE)</strong>
+        Government College of Engineering, Salem
+      </p>
+    </div>
+  </div>
+</div>
+  <script>
+    // Custom cursor & sparkle trail
+    const cursor = document.createElement("div");
+    cursor.className = "cursor";
+    document.body.appendChild(cursor);
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      for (let i = 0; i < 2; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.style.left = `${e.clientX}px`;
+        sparkle.style.top = `${e.clientY}px`;
+
+        const dx = (Math.random() - 0.5) * 40;
+        const dy = (Math.random() - 0.5) * 40;
+        sparkle.style.setProperty('--dx', `${dx}px`);
+        sparkle.style.setProperty('--dy', `${dy}px`);
+
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 600);
+      }
+    });
+
+    function animateCursor() {
+      currentX += (mouseX - currentX) * 0.2;
+      currentY += (mouseY - currentY) * 0.2;
+      cursor.style.left = `${currentX}px`;
+      cursor.style.top = `${currentY}px`;
+      requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+  </script>
+
+</body>
+</html>

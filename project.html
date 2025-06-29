@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project</title>
+
+  <!-- Fonts and Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      cursor: none;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    a.btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: transparent;
+      color: white;
+      font-weight: 800;
+      border-radius: 30px;
+      text-decoration: none;
+      letter-spacing: 2px;
+      font-size: 1rem;
+      box-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    a.btn:hover {
+      background: #16ffff;
+      box-shadow: 0 0 35px rgba(0, 255, 255, 0.9);
+      transform: scale(1.05);
+      color: #000;
+    }
+
+    .btn1 {
+      padding: 10px 25px;
+      background: transparent;
+      border: 2px solid #0ef;
+      color: white;
+      font-weight: 600;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      margin-bottom: 20px;
+      display: inline-block;
+      perspective: 800px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    .btn1:hover {
+      background: #0ef;
+      color: black;
+      box-shadow: 0 0 20px #0ef;
+      transform: rotateX(8deg) rotateY(12deg) scale(1.05);
+    }
+
+    .heading {
+      text-align: center;
+      font-size: 2.7rem;
+      margin: 40px 0 20px;
+      color: #0ef;
+      text-shadow: 0 0 10px #0ef;
+    }
+
+    .services-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 20px 60px;
+    }
+
+    /* Base services box style */
+    .services-box {
+      background: #222;
+      border-radius: 20px;
+      padding: 30px;
+      width: 360px;
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    /* Starting transform for slide-left */
+    .slide-left {
+      opacity: 0;
+      transform: translateX(-100%) scale(0.8);
+      animation: slideInLeft 0.8s forwards;
+      animation-delay: 0.3s;
+    }
+
+    /* Starting transform for slide-right */
+    .slide-right {
+      opacity: 0;
+      transform: translateX(100%) scale(0.8);
+      animation: slideInRight 0.8s forwards;
+      animation-delay: 0.5s;
+    }
+
+    .services-box:hover {
+      transform: scale(1.03) rotateX(3deg) rotateY(3deg);
+      box-shadow: 0 0 25px rgba(255, 204, 0, 0.5);
+    }
+
+    /* Slide-in animations */
+    @keyframes slideInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-100%) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    @keyframes slideInRight {
+      0% {
+        opacity: 0;
+        transform: translateX(100%) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    .services-box i {
+      font-size: 45px;
+      color: #0ef;
+    }
+
+    .services-box h3 {
+      font-size: 1.3rem;
+      margin-top: 15px;
+      color: #fff;
+    }
+
+    .services-box p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    .about-img, .about-img1 {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 15px;
+      margin: 20px 0;
+      position: relative;
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+    }
+
+    .about-img img, .about-img1 img {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      filter: brightness(1.1) contrast(1.1);
+    }
+
+    /* Cursor and effects */
+    .cursor {
+      width: 18px;
+      height: 18px;
+      background-color: #ffcc00;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+
+    .trail {
+      width: 8px;
+      height: 8px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      position: absolute;
+      pointer-events: none;
+      z-index: 9998;
+      animation: trailAnim 1.5s ease-out forwards;
+    }
+
+    .sparkle {
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle, #ffcc00, #ff6347);
+      border-radius: 50%;
+      position: absolute;
+      pointer-events: none;
+      z-index: 9998;
+      animation: sparkleAnim 0.7s ease-out forwards;
+    }
+
+    .ripple {
+      width: 50px;
+      height: 50px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9997;
+      animation: rippleAnim 0.6s ease-out;
+    }
+
+    @keyframes trailAnim {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    @keyframes sparkleAnim {
+      0% { transform: scale(1) rotate(0deg); opacity: 1; }
+      100% { transform: scale(1.5) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes rippleAnim {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <br><br><a href="index.html" class="btn1">Home</a>
+
+  <section class="services" id="services">
+    <h2 class="heading"><span>Projects</span></h2>
+
+    <div class="services-container">
+      <div class="services-box slide-left" style="animation-delay: 0.2s;">
+        <i class='bx bx-code-alt'></i>
+        <h3>Line Follower Robot Using L298N Module</h3>
+        <div class="about-img">
+          <img src="./assets/images/project 1.jpg" alt="Line Follower Robot"/>
+        </div>
+        <h3>Objectives</h3>
+        <p>
+          - Design and develop a simple line-following robot using the L298N module.<br>
+          - Implement IR sensors to detect and follow a line.<br>
+          - Control the motors using the L298N driver module and a microcontroller (e.g., Arduino).<br>
+          - Ensure smooth navigation and responsiveness to turns and obstacles.
+        </p>
+        <a href="https://circuitdigest.com/electronic-circuits/line-follower-robot" class="btn">Read <span style="font-size: 1.2em;"></span>more</a>
+      </div>
+
+      <div class="services-box slide-right" style="animation-delay: 0.4s;">
+        <i class='bx bxs-paint'></i>
+        <h3>Automatic Number Plate Detection And Tyre Killer</h3>
+        <div class="about-img1">
+          <img src="./assets/images/project 2.jpeg" alt="Automatic Number Plate Detection"/>
+        </div>
+        <h3>Objectives</h3>
+        <p>
+          - Implement automatic traffic light control and theft vehicle detection.<br>
+          - Use image processing for number plate recognition.<br>
+          - Integrate road spikes to puncture tires for unauthorized vehicles.
+        </p>
+        <a href="https://www.researchgate.net/publication/323060010_Automatic_number_plate_recognition_system_for_vehicle_identification" class="btn">Read <span style="font-size: 1.2em;"></span>more</a>
+      </div>
+
+      <div class="services-box slide-left" style="animation-delay: 0.6s;">
+          <i class='bx bx-code-alt'></i>
+        <h3>RFID-Based Access Control System with RTC, Google Sheet Integration, and Servo Motor Interface </h3>
+        <div class="about-img">
+          <img src="./assets/images/project 3.png" alt="Obstacle Avoidance Robot"/>
+        </div>
+        <h3>Objectives</h3>
+        <p>
+          - Implement an RFID-based system to securely identify authorized users for access control. <br>
+            -  Integrate a Real-Time Clock (RTC) module to timestamp every access event accurately.<br>
+            -  Enable logging of access records (user ID, time, date) to Google Sheets for real-time remote monitoring and data storage.<br>
+            -  Interface a Servo motor to physically control the locking/unlocking mechanism of the door or gate.<br>
+             - Ensure the system provides automated and reliable access management with easy tracking of entry logs.
+             
+        </p>
+        <a href="https://docs.google.com/document/d/1H9nwhfgbbnTGkPJjKVwSZ8n6ucSU9Pfqh3xPRLQVzxw/edit?tab=t.0" class="btn">Read <span style="font-size: 1.2em;"></span>more</a>
+      </div>
+
+      <div class="services-box slide-right" style="animation-delay: 0.8s;">
+        <i class='bx bxs-paint'></i>
+        <h3>PCB Design for Accelerometer-Driven LED Direction Indicator with XIAO ESP32-C3</h3>
+        <div class="about-img1">
+          <img src="./assets/images/project 4.png" alt="Quadcopter Drone"/>
+        </div>
+        <h3>Objectives</h3>
+        <p>
+          - Design and develop a compact PCB integrating Seeed Studio XIAO ESP32-C3 and an accelerometer sensor.<br>
+         - Use accelerometer data to detect the device’s orientation and movement direction.<br>
+         - Blink LEDs corresponding to the detected direction to provide visual feedback.<br>
+         - Implement efficient real-time sensor data processing on the ESP32-C3 microcontroller.<br>
+         - Ensure reliable and responsive LED control based on accelerometer inputs.
+        </p>
+        <a href="https://docs.google.com/document/d/1wy-P_ENmnhRElSexUhLlk1zth0-yQ0qPMraoLpZDj8c/edit?tab=t.0" class="btn">Read <span style="font-size: 1.2em;"></span>more</a>
+      </div>
+
+    <div class="services-box slide-left" style="animation-delay: 1s;">
+  <i class='bx bx-paper-plane'></i>
+  <h3>Cardboard Drone – SPARTA (Surveillance and Payload Aircraft for Rural, Tactical, and Agricultural Missions)</h3>
+  <div class="about-img">
+    <video controls style="width: 100%; border-radius: 12px; box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);">
+      <source src="./assets/video/SPARTA- Cardboard Drone.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <h3>Objectives</h3>
+  <p>
+    - Develop an eco-friendly, single-motor drone using cardboard and 3D-printed parts.<br>
+    - Utilize ESP32-C3 modules for both transmitter and receiver.<br>
+    - Employ LoRa SX1278 for long-range, low-power bidirectional communication.<br>
+    - Implement differential wing actuation using servos to control direction and stability.<br>
+    - Enable real-time telemetry and mission-based payload deployment in rural and tactical zones.
+  </p>
+  <a href="https://theconversation.com/ukraine-war-australian-made-cardboard-drones-used-to-attack-russian-airfield-show-how-innovation-is-key-to-modern-warfare-212629" class="btn">Read <span style="font-size: 1.2em;"></span>more</a>
+</div>
+
+
+    </div>
+  </section>
+
+  <div class="cursor"></div>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+
+    document.addEventListener('mousemove', e => {
+      const x = e.clientX, y = e.clientY;
+      cursor.style.left = x + 'px';
+      cursor.style.top = y + 'px';
+
+      const t = document.createElement('div');
+      t.className = 'trail';
+      t.style.left = x + 'px';
+      t.style.top = y + 'px';
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 1500);
+
+      if (Math.random() < 0.2) {
+        const s = document.createElement('div');
+        s.className = 'sparkle';
+        s.style.left = x + 'px';
+        s.style.top = y + 'px';
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 700);
+      }
+    });
+
+    document.addEventListener('click', e => {
+      const r = document.createElement('div');
+      r.className = 'ripple';
+      r.style.left = e.clientX + 'px';
+      r.style.top = e.clientY + 'px';
+      document.body.appendChild(r);
+      setTimeout(() => r.remove(), 600);
+    });
+  </script>
+</body>
+</html>
